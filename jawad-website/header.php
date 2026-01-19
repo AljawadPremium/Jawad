@@ -42,6 +42,8 @@ $switchLangUrl = $targetFile . ($queryString ? '?' . $queryString : '');
 
 <head>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/Img/iPhone.png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -143,7 +145,8 @@ $switchLangUrl = $targetFile . ($queryString ? '?' . $queryString : '');
                 </li>
 
                 <!-- Language switch -->
-                <li><a href="<?= $switchLangUrl ?>" class="lang-btn"><?php echo $isArabicPage ? 'English' : 'عربي'; ?></a></li>
+                <li><a href="<?= $switchLangUrl ?>"
+                        class="lang-btn"><?php echo $isArabicPage ? 'English' : 'عربي'; ?></a></li>
 
 
             </ul>

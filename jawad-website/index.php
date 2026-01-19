@@ -3,41 +3,41 @@
 <!-- HERO -->
 <header class="hero">
     <img src="Img/hero-image.png" alt="aljawad" class="hero-logo">
-    <h1>Aljawad Premium</h1>
-    <p>Your trusted partner in hospitality, catering, and food supply services across Saudi Arabia.</p>
+    <h1>Aljawad Premium – Hospitality & Food Supply Solutions</h1>
+    <p>Your trusted partner in <strong>hospitality</strong>, <strong>catering</strong>, and <strong>food supply
+            services</strong> across <strong>Saudi Arabia</strong>.</p>
+
 </header>
 
-<!-- WHO WE ARE -->
 <section id="about">
-    <h2>Who We Are</h2>
+    <h2>Who We Are & Our Presence</h2>
 
     <p>
-        Since its establishment in 2017, Jawad Al-Diyafa Trading has specialized in catering and food supply
-        services, becoming one of the leading entities in this field within the Kingdom of Saudi Arabia.
+        Since its establishment in <strong>2017</strong>, Jawad Al-Diyafa Trading has specialized in
+        <strong>catering</strong> and <strong>food supply services</strong>, becoming one of the leading entities in
+        this field within the <strong>Kingdom of Saudi Arabia</strong>.
     </p>
 
     <p>
-        We take pride in offering comprehensive solutions that meet the needs of both governmental and private
-        sectors, having served over <strong>50 entities</strong> with quality, efficiency, and reliability at
-        the core of our operations.
+        We take pride in offering comprehensive solutions that meet the needs of both governmental and private sectors,
+        having served over <strong>50 entities</strong> with quality, efficiency, and reliability at the core of our
+        operations.
+    </p>
+
+    <p>
+        We are proud to have <strong>14 branches</strong> across <strong>12 cities</strong> in the Kingdom, enhancing
+        our ability to deliver our services efficiently and swiftly.
     </p>
 
     <p>
         We import products from a select group of trusted and reputable suppliers around the world, ensuring
-        certified quality and maintaining a strict commitment to the highest standards of food safety,
-        sustainability, and compliance with local and international regulations—ensuring the delivery of
-        products and services that meet the expectations of the Saudi market and contribute to its food security.
+        <strong>certified quality</strong> and maintaining a strict commitment to the highest standards of <strong>food
+            safety</strong>, sustainability, and compliance with local and international regulations—ensuring the
+        delivery of products and services that meet the expectations of the Saudi market and contribute to its
+        <strong>food security</strong>.
     </p>
 </section>
 
-<!-- OUR PRESENCE -->
-<section id="presence">
-    <h2>Our Presence</h2>
-    <p>
-        We are proud to have <strong>14 branches</strong> across <strong>12 cities</strong> in the Kingdom of
-        Saudi Arabia, enhancing our ability to deliver our services efficiently and swiftly.
-    </p>
-</section>
 
 <!-- LOGISTICS -->
 <section id="logistics">
@@ -49,7 +49,8 @@
         distribution network.
     </p>
 
-    <h3>Key Features</h3>
+    <p class="feature-title"><strong>Key Features</strong></p>
+
 
     <ul class="features">
         <li>
@@ -86,13 +87,16 @@
 
     <p>
         Jawad Al-Diyafa operates with official licenses approved by the relevant government authorities.
-        All our facilities are certified by the Saudi Food and Drug Authority (SFDA), ensuring strict adherence
+        All our facilities are certified by the <strong>Saudi Food and Drug Authority (SFDA)</strong>, ensuring strict
+        adherence
+
         to the highest health and environmental standards.
     </p>
 
     <p>
         We are committed to delivering services that fully comply with the regulations and laws of the Kingdom
-        of Saudi Arabia. This commitment is the foundation of our clients’ trust and the quality we consistently deliver.
+        of Saudi Arabia. This commitment is the foundation of our clients’ trust and the quality we consistently
+        deliver.
     </p>
 
     <img src="/aljawad/Img/sfda-logo.jpg" class="license-logo" alt="SFDA">
@@ -105,6 +109,7 @@
     <p>
         We are proud to announce that our dedicated production facility is currently under development and set
         to be fully operational by <strong>December 2025</strong>.
+
     </p>
 
     <p>
@@ -112,7 +117,8 @@
         our expanding operations in the food sector.
     </p>
 
-    <h3>The facility will specialize in:</h3>
+    <p class="feature-title"><strong>The facility will specialize in:</strong></p>
+
     <ul class="features">
         <li>Frozen products</li>
         <li>Poultry processing</li>
@@ -127,7 +133,8 @@
 </section>
 
 <section id="brands">
-    <h2>Our Brands</h2>
+    <h2>Our Brands & Partners</h2>
+
 
     <div class="partners-slider">
         <div class="partners-track">
@@ -154,30 +161,29 @@
 
 
 
-<section id="partners">
-    <h2>Our Partners</h2>
 
-    <div class="partners-slider">
-        <div class="partners-track">
-            <?php
-            $partners = glob("Img/partner/*.{png,jpg,jpeg,webp}", GLOB_BRACE);
 
-            // FIRST LOOP
-            foreach ($partners as $logo) {
-                echo '<div class="partner-item">
+<div class="partners-slider">
+    <div class="partners-track">
+        <?php
+        $partners = glob("Img/partner/*.{png,jpg,jpeg,webp}", GLOB_BRACE);
+
+        // FIRST LOOP
+        foreach ($partners as $logo) {
+            echo '<div class="partner-item">
                         <img src="/' . $logo . '" alt="Partner">
                       </div>';
-            }
+        }
 
-            // DUPLICATE FOR SMOOTH LOOP
-            foreach ($partners as $logo) {
-                echo '<div class="partner-item">
+        // DUPLICATE FOR SMOOTH LOOP
+        foreach ($partners as $logo) {
+            echo '<div class="partner-item">
                         <img src="/' . $logo . '" alt="Partner">
                       </div>';
-            }
-            ?>
-        </div>
+        }
+        ?>
     </div>
-</section>
+</div>
+
 
 <?php include 'footer.php'; ?>

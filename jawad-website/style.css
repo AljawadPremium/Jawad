@@ -311,7 +311,30 @@ footer, .site-footer {
     max-width: 900px;
 }
 
-/* RTL Support */
-body.rtl { direction: rtl; text-align: right; }
-body.rtl .nav-container { flex-direction: row-reverse; }
-body.rtl .partners-track { animation-direction: reverse; }
+.feature-title {
+    font-size: 20px;
+    color: var(--gold);
+    margin: 30px auto 15px auto;
+    text-align: left;
+    max-width: 900px;
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 10px 20px;
+    }
+    .nav-logo {
+        height: 40px;
+    }
+    nav ul {
+        gap: 10px;
+    }
+    nav ul li a {
+        font-size: 14px;
+    }
+}
+
+/* Ensure sections don't have double borders after merging */
+section + section {
+    border-top: none;
+}

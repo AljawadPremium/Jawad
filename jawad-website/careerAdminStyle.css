@@ -1,0 +1,120 @@
+.career-admin {
+    max-width: 1200px;
+    margin: 140px auto;
+    padding: 20px;
+}
+
+.career-admin h2 {
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 30px;
+}
+
+/* Tabs */
+.admin-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.admin-tabs .tab {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: #eee;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-tabs .tab.active {
+    background: var(--gold);
+    color: #fff;
+}
+
+/* Cards */
+.admin-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+}
+
+/* Form */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.field.full {
+    grid-column: span 2;
+}
+
+.field label {
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.field small {
+    color: #777;
+    font-weight: normal;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.admin-btn {
+    margin-top: 25px;
+    padding: 12px 24px;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Existing Jobs */
+.job-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.job-row .actions a {
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.actions .edit {
+    color: #007bff;
+}
+
+.actions .delete {
+    color: red;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    font-size: 14px;
+}
+
+.admin-table th {
+    background: #f7f7f7;
+    font-weight: 600;
+}

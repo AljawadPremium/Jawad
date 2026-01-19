@@ -1,0 +1,128 @@
+<?php
+// Detect current page language
+$isArabicPage = (
+    strpos($_SERVER['PHP_SELF'], 'index-ar') !== false ||
+    strpos($_SERVER['PHP_SELF'], 'career-ar') !== false ||
+    (isset($_GET['lang']) && $_GET['lang'] == 'ar')
+);
+
+// Detect home page (index only)
+$isHomePage = (
+    strpos($_SERVER['PHP_SELF'], 'index.php') !== false ||
+    strpos($_SERVER['PHP_SELF'], 'index-ar.php') !== false
+);
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $isArabicPage ? 'ar' : 'en'; ?>" <?php echo $isArabicPage ? 'dir="rtl"' : ''; ?>>
+<head>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+
+    <title>
+        <?php echo $isArabicPage
+            ? 'الجواد بريميوم | لتوريد المواد الغذائية'
+            : 'Aljawad Premium – Hospitality & Food Supply Solutions';
+        ?>
+    </title>
+
+    <!-- Main global styles -->
+    <link rel="stylesheet" href="/style.css?v=10">
+
+    <!-- Career public pages -->
+    <?php
+    if (
+        strpos($_SERVER['PHP_SELF'], 'career.php') !== false ||
+        strpos($_SERVER['PHP_SELF'], 'career-ar.php') !== false
+    ):
+    ?>
+        <link rel="stylesheet" href="/careerStyle.css?v=10">
+    <?php endif; ?>
+
+    <!-- Career admin page -->
+    <?php
+    if (strpos($_SERVER['PHP_SELF'], 'career-admin.php') !== false):
+    ?>
+        <link rel="stylesheet" href="/careerAdminStyle.css?v=10">
+    <?php endif; ?>
+	
+	<?php
+    if (strpos($_SERVER['PHP_SELF'], 'apply.php') !== false):
+    ?>
+    <link rel="stylesheet" href="/applicationStyle.css?v=10">
+    <?php endif; ?>
+	
+
+    <meta name="description" content="نمتلك منظومة لوجستية متكاملة تُعد من بين الأقوى في قطاع الأغذية المجمدة في المملكة.
+    تغطي خدماتنا كافة مناطق المملكة عبر شبكة توزيع متقدمة مدعومة بأسطول حديث من
+    شاحنات النقل المبرد والمجمد." />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0BQ05GZ7XE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0BQ05GZ7XE');
+    </script>
+</head>
+
+<body class="<?php echo $isArabicPage ? 'rtl' : ''; ?>">
+
+<nav>
+    <div class="nav-container">
+
+        <!-- Logo -->
+        <img src="Img/logo.png" class="nav-logo" alt="Logo">
+
+        <!-- Navigation -->
+        <ul>
+
+            <!-- Home / Careers -->
+            <?php if ($isArabicPage): ?>
+                <li><a href="index-ar.php">الرئيسية</a></li>
+                <li><a href="career-ar.php">الوظائف</a></li>
+            <?php else: ?>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="career.php">Careers</a></li>
+            <?php endif; ?>
+
+            <!-- Landing sections (home only) -->
+            <?php if ($isHomePage && !$isArabicPage): ?>
+                <li><a href="#about">Who We Are</a></li>
+                <li><a href="#presence">Our Presence</a></li>
+                <li><a href="#logistics">Logistics</a></li>
+                <li><a href="#licenses">Licenses</a></li>
+                <li><a href="#factory">Factory</a></li>
+                <li><a href="#brands">Brands</a></li>
+                <li><a href="#partners">Partners</a></li>
+            <?php endif; ?>
+
+            <?php if ($isHomePage && $isArabicPage): ?>
+                <li><a href="#about">من نحن</a></li>
+                <li><a href="#presence">توسعنا</a></li>
+                <li><a href="#logistics">المنظومة اللوجستية</a></li>
+                <li><a href="#licenses">تراخيصنا</a></li>
+                <li><a href="#factory">مصنع الأغذية</a></li>
+                <li><a href="#brands">العلامات التجارية</a></li>
+                <li><a href="#partners">شركاؤنا</a></li>
+            <?php endif; ?>
+
+            <!-- Store -->
+            <li>
+                <a href="#" class="store-btn">
+                    <?php echo $isArabicPage ? 'المتجر' : 'Store'; ?>
+                </a>
+            </li>
+
+            <!-- Language switch -->
+            <?php if ($isArabicPage): ?>
+                <li><a href="index.php" class="lang-btn">English</a></li>
+            <?php else: ?>
+                <li><a href="index-ar.php" class="lang-btn">عربي</a></li>
+            <?php endif; ?>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="page-wrapper">

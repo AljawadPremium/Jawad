@@ -1,0 +1,76 @@
+.application-form {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+}
+
+.application-form h3 {
+    margin: 40px 0 20px;
+    color: var(--gold);
+    font-size: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.form-grid .full {
+    grid-column: span 2;
+}
+
+.application-form input,
+.application-form textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.application-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.application-form input:focus,
+.application-form textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(197,157,95,0.15);
+}
+
+.file-label {
+    display: block;
+    margin: 15px 0 8px;
+    font-weight: 600;
+}
+
+.apply-btn {
+    margin-top: 35px;
+    padding: 14px;
+    width: 100%;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.apply-btn:hover {
+    background: #b58a3c;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

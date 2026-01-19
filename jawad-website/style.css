@@ -1,0 +1,317 @@
+/* ----------------------------------------------------------
+   1. GLOBAL STYLES & RESET
+---------------------------------------------------------- */
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #ffffff;
+    color: #3a3a3a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+:root {
+    --gold: #c9a95a;
+    --dark: #222222;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* ----------------------------------------------------------
+   2. NAVIGATION BAR
+---------------------------------------------------------- */
+nav {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e6e6e6;
+    display: flex;
+    justify-content: center; /* Center the container */
+    align-items: center;
+    padding: 12px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    box-sizing: border-box;
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    height: 55px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav ul li a:hover { color: var(--gold); }
+
+/* Buttons in Nav */
+.careers-btn {
+    padding: 8px 16px;
+    background-color: var(--gold);
+    border-radius: 5px;
+    color: #fff !important;
+}
+
+.store-btn {
+    padding: 8px 16px;
+    background-color: #222;
+    color: #fff !important;
+    border-radius: 5px;
+}
+
+.lang-btn {
+    padding: 8px 16px;
+    background-color: #ffffff;
+    border: 1px solid var(--gold);
+    border-radius: 5px;
+    color: var(--gold) !important;
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+   3. HERO SECTION (ALJAWAD PREMIUM) - REFIXED FOR CENTERING
+---------------------------------------------------------- */
+.hero {
+    min-height: 100vh;
+    background-color: #242424; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers everything vertically */
+    align-items: center;     /* Centers everything horizontally */
+    padding: 40px 20px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Updated Stack: No absolute positioning needed */
+.hero-content-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero-logo {
+    width: 450px; 
+    max-width: 80vw;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    
+    /* Luxury Animation */
+    opacity: 0;
+    animation: luxuryFadeIn 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.hero h1 {
+    /* Removed absolute position and translates */
+    font-size: 48px;
+    color: #D4AF37; 
+    font-weight: 700;
+    margin: -30px 0 0 0; /* Negative top margin pulls it slightly into the logo area if desired */
+    white-space: nowrap;
+    letter-spacing: 1px;
+    z-index: 5;
+
+    /* Appear after logo */
+    opacity: 0;
+    animation: luxuryFadeIn 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 1.5s;
+}
+
+.hero p {
+    margin-top: 30px; /* Reduced from 60px for better grouping */
+    max-width: 650px;
+    font-size: 18px;
+    color: #a0a0a0; 
+    font-weight: 300;
+    line-height: 1.6;
+
+    /* Appear last */
+    opacity: 0;
+    animation: luxuryFadeIn 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 3s;
+}
+
+@keyframes luxuryFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 32px;
+        margin-top: -10px;
+    }
+    .hero-logo {
+        width: 300px;
+    }
+}
+/* ----------------------------------------------------------
+   4. CONTENT SECTIONS
+---------------------------------------------------------- */
+.page-wrapper {
+    flex: 1 0 auto;
+    width: 100%;
+}
+
+section {
+    padding: 90px 50px;
+    text-align: center;
+    border-bottom: 1px solid #f2f2f2;
+    background: #fff;
+}
+
+section h2 {
+    font-size: 32px;
+    color: var(--gold);
+    margin-bottom: 16px;
+}
+
+section p {
+    font-size: 17px;
+    max-width: 900px;
+    margin: auto;
+    line-height: 1.7;
+    color: #444;
+}
+
+.features {
+    list-style: none;
+    max-width: 900px;
+    margin: 40px auto 0 auto;
+    padding: 0;
+    text-align: left;
+}
+
+.features li {
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+/* Partners Slider */
+.partners-slider {
+    width: 100%;
+    overflow: hidden;
+    margin: 40px 0;
+}
+
+.partners-track {
+    display: flex;
+    width: max-content;
+    animation: partner-scroll 30s linear infinite;
+}
+
+.partner-item {
+    width: 180px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes partner-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* ----------------------------------------------------------
+   5. FOOTER
+---------------------------------------------------------- */
+footer, .site-footer {
+    flex-shrink: 0;
+    background-color: #111;
+    color: #ccc;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.footer-social a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-copy {
+    font-size: 13px;
+    color: #aaa;
+}
+
+/* ----------------------------------------------------------
+   6. RESPONSIVE & OVERRIDES
+---------------------------------------------------------- */
+@media (max-width: 900px) {
+    .nav-logo { height: 45px; }
+    .hero h1 { font-size: 32px; top: 60%; }
+    .hero-logo { width: 300px; }
+    section { padding: 60px 20px; }
+}
+
+@media (max-width: 600px) {
+    nav ul { display: none; }
+    .hero-logo { width: 220px; }
+    .hero h1 { font-size: 24px; }
+}
+
+/* General image visibility for secondary sections */
+.brands-img, .partners-img, .license-logo {
+    display: block;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 900px;
+}
+
+/* RTL Support */
+body.rtl { direction: rtl; text-align: right; }
+body.rtl .nav-container { flex-direction: row-reverse; }
+body.rtl .partners-track { animation-direction: reverse; }

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /career-admin.php
+Disallow: /career-edit.php
+Disallow: /career-delete.php
+Disallow: /login.php
+Disallow: /uploads/
+
+Sitemap: https://aljawad.com/sitemap.xml

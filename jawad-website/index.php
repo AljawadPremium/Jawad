@@ -2,10 +2,10 @@
 
 <!-- HERO -->
 <header class="hero">
-    <img src="Img/hero-image.png" alt="aljawad" class="hero-logo">
+    <img src="Img/hero-image.png" alt="aljawad" class="hero-logo" fetchpriority="high" loading="eager">
     <h1>Aljawad Premium – Hospitality & Food Supply Solutions</h1>
-    <p>Your trusted partner in <strong>hospitality</strong>, <strong>catering</strong>, and <strong>food supply
-            services</strong> across <strong>Saudi Arabia</strong>.</p>
+    <p>Your trusted partner in <strong>hospitality</strong>, catering, and food supply services across Saudi Arabia.</p>
+
 
 </header>
 
@@ -13,29 +13,27 @@
     <h2>Who We Are & Our Presence</h2>
 
     <p>
-        Since its establishment in <strong>2017</strong>, Jawad Al-Diyafa Trading has specialized in
-        <strong>catering</strong> and <strong>food supply services</strong>, becoming one of the leading entities in
-        this field within the <strong>Kingdom of Saudi Arabia</strong>.
+        Since its establishment in 2017, Jawad Al-Diyafa Trading has specialized in <strong>catering</strong> and food
+        supply services within the <strong>Kingdom of Saudi Arabia</strong>.
     </p>
 
     <p>
-        We take pride in offering comprehensive solutions that meet the needs of both governmental and private sectors,
-        having served over <strong>50 entities</strong> with quality, efficiency, and reliability at the core of our
-        operations.
+        We take pride in offering comprehensive solutions, having served over 50 entities with quality, efficiency, and
+        reliability at the core of our operations.
+    </p>
+
+
+    <p>
+        We are proud to have 14 branches across 12 cities in the Kingdom, enhancing our ability to deliver services
+        efficiently.
     </p>
 
     <p>
-        We are proud to have <strong>14 branches</strong> across <strong>12 cities</strong> in the Kingdom, enhancing
-        our ability to deliver our services efficiently and swiftly.
+        We import products from trusted suppliers worldwide, ensuring <strong>certified quality</strong> and maintaining
+        a strict commitment to food safety and sustainability—ensuring the delivery of products that meet the
+        expectations of the Saudi market.
     </p>
 
-    <p>
-        We import products from a select group of trusted and reputable suppliers around the world, ensuring
-        <strong>certified quality</strong> and maintaining a strict commitment to the highest standards of <strong>food
-            safety</strong>, sustainability, and compliance with local and international regulations—ensuring the
-        delivery of products and services that meet the expectations of the Saudi market and contribute to its
-        <strong>food security</strong>.
-    </p>
 </section>
 
 

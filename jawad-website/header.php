@@ -50,13 +50,33 @@ $switchLangUrl = $targetFile . ($queryString ? '?' . $queryString : '');
 
     <title>
         <?php echo $isArabicPage
-            ? 'الجواد بريميوم | لتوريد المواد الغذائية'
-            : 'Aljawad Premium – Hospitality & Food Supply Solutions';
+            ? 'الجواد بريميوم | خدمات الضيافة، توريد الأغذية والخدمات اللوجستية في السعودية'
+            : 'Aljawad Premium | Hospitality, Catering & Food Supply Solutions in Saudi Arabia';
         ?>
     </title>
 
-    <!-- Main global styles -->
-    <link rel="stylesheet" href="/style.css?v=10">
+    <meta name="description" content="<?php echo $isArabicPage
+        ? 'شركة جواد الضيافة (الجواد بريميوم) متخصصة في خدمات الضيافة وتوريد الأغذية والخدمات اللوجستية في السعودية. نقدم حلولاً متكاملة للقطاعين الحكومي والخاص.'
+        : 'Aljawad Premium specialized in Hospitality, Catering, and Food Supply Solutions in Saudi Arabia. Providing integrated logistics and food services for govt & private sectors.';
+    ?>" />
+
+    <!-- Social Media Meta Tags (OG) -->
+    <meta property="og:title" content="Aljawad Premium | Hospitality & Food Supply" />
+    <meta property="og:description"
+        content="Your trusted partner in hospitality, catering, and food supply services across Saudi Arabia." />
+    <meta property="og:image" content="/Img/logo.png" />
+    <meta property="og:url" content="https://aljawad.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aljawad Premium | Hospitality & Food Supply" />
+    <meta name="twitter:description"
+        content="Your trusted partner in catering and food supply services across Saudi Arabia." />
+    <meta name="twitter:image" content="/Img/logo.png" />
+
+    <!-- Main global styles with versioning for cache control -->
+    <link rel="stylesheet" href="/style.css?v=<?php echo filemtime('style.css'); ?>">
 
     <!-- Career public pages -->
     <?php
@@ -81,10 +101,6 @@ $switchLangUrl = $targetFile . ($queryString ? '?' . $queryString : '');
         <link rel="stylesheet" href="/applicationStyle.css?v=10">
     <?php endif; ?>
 
-
-    <meta name="description" content="نمتلك منظومة لوجستية متكاملة تُعد من بين الأقوى في قطاع الأغذية المجمدة في المملكة.
-    تغطي خدماتنا كافة مناطق المملكة عبر شبكة توزيع متقدمة مدعومة بأسطول حديث من
-    شاحنات النقل المبرد والمجمد." />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0BQ05GZ7XE"></script>

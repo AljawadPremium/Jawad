@@ -266,7 +266,8 @@ section p {
     list-style: none;
     padding: 0;
     text-align: left;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
+    max-width: 900px;
 }
 
 .features li {

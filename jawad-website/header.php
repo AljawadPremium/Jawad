@@ -120,8 +120,15 @@ $switchLangUrl = $targetFile . ($queryString ? '?' . $queryString : '');
             <!-- Logo -->
             <img src="Img/Style/Logos/Black logo.png" class="nav-logo" alt="Logo">
 
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <!-- Navigation -->
-            <ul>
+            <ul class="nav-menu">
 
                 <!-- Home / Careers -->
                 <?php if ($isArabicPage): ?>
@@ -168,5 +175,34 @@ $switchLangUrl = $targetFile . ($queryString ? '?' . $queryString : '');
             </ul>
         </div>
     </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const body = document.body;
+
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    if (navMenu.classList.contains('active')) {
+                        body.style.overflow = 'hidden'; // Prevent scrolling
+                    } else {
+                        body.style.overflow = '';
+                    }
+                });
+
+                // Close menu when clicking a link
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        body.style.overflow = '';
+                    });
+                });
+            }
+        });
+    </script>
 
     <div class="page-wrapper">

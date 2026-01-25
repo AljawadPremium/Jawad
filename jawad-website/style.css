@@ -363,6 +363,45 @@ footer,
 /* ----------------------------------------------------------
    6. RESPONSIVE & OVERRIDES
 ---------------------------------------------------------- */
+/* ----------------------------------------------------------
+   7. HAMBURGER MENU
+---------------------------------------------------------- */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    z-index: 1001;
+    padding: 10px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--dark);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hamburger Animation */
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: var(--gold);
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--gold);
+}
+
+/* ----------------------------------------------------------
+   8. RESPONSIVE DESIGN (Top-level overrides)
+---------------------------------------------------------- */
 @media (max-width: 900px) {
     .nav-logo {
         height: 50px;
@@ -377,60 +416,88 @@ footer,
     }
 }
 
-@media (max-width: 600px) {
-    nav ul {
-        display: none;
+@media (max-width: 768px) {
+
+    /* Mobile Navigation */
+    .hamburger {
+        display: block;
     }
 
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* LTR Default */
+        width: 100%;
+        height: 100vh;
+        background-color: #fff;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease-in-out;
+        z-index: 1000;
+        box-shadow: none;
+        padding-top: 60px;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-menu li {
+        margin: 15px 0;
+    }
+
+    .nav-menu li a {
+        font-size: 20px;
+    }
+
+    /* Hide scroll bar when menu is open is handled by JS on body */
+
+    /* Typography Adjustments */
     .hero-content h1 {
         font-size: 28px;
     }
 
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    section h2 {
+        font-size: 28px;
+    }
+
+    section p {
+        font-size: 16px;
+    }
+
     .logistics-container {
         flex-direction: column;
+        gap: 30px;
+    }
+
+    .feature-title {
         text-align: center;
     }
 
-    .logistics-text {
-        text-align: center;
+    .features {
+        max-width: 100%;
     }
 }
 
-/* General image visibility for secondary sections */
-.brands-img,
-.partners-img,
-.license-logo {
-    display: block;
-    margin: 20px auto;
-    width: 80%;
-    max-width: 900px;
-}
-
-.feature-title {
-    font-size: 22px;
-    color: var(--gold);
-    margin: 30px auto 15px auto;
-    text-align: left;
-    max-width: 900px;
-    font-family: 'Moshreq', sans-serif;
-}
-
-@media (max-width: 768px) {
-    nav {
-        padding: 10px 20px;
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 24px;
     }
 
-    nav ul {
-        gap: 10px;
+    section {
+        padding: 50px 15px;
     }
 }
 
-section+section {
-    border-top: none;
-}
 
 /* ----------------------------------------------------------
-   7. RTL SUPPORT
+   9. RTL SUPPORT
 ---------------------------------------------------------- */
 [dir="rtl"] .logistics-text,
 [dir="rtl"] .feature-title,
@@ -446,4 +513,36 @@ section+section {
 [dir="rtl"] .features li::before {
     margin-left: 0;
     margin-right: -1em;
+}
+
+/* RTL Mobile Menu */
+@media (max-width: 768px) {
+    [dir="rtl"] .nav-menu {
+        right: auto;
+        left: -100%;
+        /* Slide from left */
+    }
+
+    [dir="rtl"] .nav-menu.active {
+        left: 0;
+    }
+
+    [dir="rtl"] .feature-title {
+        text-align: center;
+        /* Center titles on small screens even in RTL */
+    }
+}
+
+/* General image visibility for secondary sections */
+.brands-img,
+.partners-img,
+.license-logo {
+    display: block;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 900px;
+}
+
+section+section {
+    border-top: none;
 }

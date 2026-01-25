@@ -16,7 +16,7 @@
         <h1 style="color: var(--gold); font-family: 'Moshreq', sans-serif; font-size: 36px; margin-bottom: 15px;">
             الجواد بريميوم | خدمات الضيافة وتوريد الأغذية والخدمات اللوجستية
         </h1>
-        <p style="font-size: 20px; color: #555;">
+        <p style="font-size: 20px;">
             شريككم الموثوق في <strong>خدمات الضيافة</strong> وتوريد الأغذية في جميع أنحاء المملكة العربية السعودية.
         </p>
     </div>

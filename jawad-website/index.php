@@ -15,7 +15,7 @@
         <h1 style="color: var(--gold); font-family: 'Moshreq', sans-serif; font-size: 36px; margin-bottom: 15px;">
             Aljawad Premium – Hospitality & Food Supply Solutions
         </h1>
-        <p style="font-size: 20px; color: #555;">
+        <p style="font-size: 20px;">
             Your trusted partner in <strong>hospitality</strong>, catering, and food supply services across Saudi
             Arabia.
         </p>

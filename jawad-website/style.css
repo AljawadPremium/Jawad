@@ -204,6 +204,16 @@ section {
     /* For patterns */
 }
 
+/* Specific styling for About section to support Beige text */
+#about {
+    background-color: var(--dark-green);
+    color: var(--beige);
+}
+
+#about p {
+    color: var(--beige);
+}
+
 /* Pattern Background Class */
 .bg-pattern {
     background-image: url('Img/Style/Patterns/pattern1.png');

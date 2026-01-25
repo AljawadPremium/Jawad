@@ -1,15 +1,22 @@
 <?php include 'header.php'; ?>
 
-<!-- HERO -->
-<header class="hero" dir="rtl">
-    <img src="Img/hero-image.png" class="hero-logo" alt="Aljawad" fetchpriority="high" loading="eager">
-    <h1>الجواد بريميوم | خدمات الضيافة وتوريد الأغذية والخدمات اللوجستية</h1>
-    <p>شريككم الموثوق في <strong>خدمات الضيافة</strong> وتوريد الأغذية في جميع أنحاء المملكة العربية السعودية.</p>
+<!-- HERO SLIDER -->
+<header class="hero-slider" dir="rtl">
+    <div class="slide active" style="background-image: url('Img/Style/Slider/s1.png');"></div>
+    <div class="slide" style="background-image: url('Img/Style/Slider/s2.png');"></div>
+    <div class="slide" style="background-image: url('Img/Style/Slider/s3.png');"></div>
 
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1>الجواد بريميوم | خدمات الضيافة وتوريد الأغذية والخدمات اللوجستية</h1>
+            <p>شريككم الموثوق في <strong>خدمات الضيافة</strong> وتوريد الأغذية في جميع أنحاء المملكة العربية السعودية.
+            </p>
+        </div>
+    </div>
 </header>
 
 <!-- من نحن وتوسعنا -->
-<section id="about" dir="rtl">
+<section id="about" dir="rtl" class="bg-pattern">
     <h2>من نحن وتوسعنا</h2>
 
     <p>
@@ -38,46 +45,55 @@
 <section id="logistics" dir="rtl">
     <h2>منظومتنا اللوجستية</h2>
 
-    <p>
-        نمتلك منظومة لوجستية متكاملة تُعد من بين الأقوى في قطاع الأغذية المجمدة
-        في المملكة، وتغطي خدماتنا كافة مناطق المملكة عبر شبكة توزيع متقدمة
-        مدعومة بأسطول حديث من شاحنات النقل المبرد والمجمد.
-    </p>
+    <div class="logistics-container">
 
-    <p class="feature-title"><strong>مميزات المنظومة</strong></p>
+        <div class="logistics-text">
+            <p style="margin: 0;">
+                نمتلك منظومة لوجستية متكاملة تُعد من بين الأقوى في قطاع الأغذية المجمدة
+                في المملكة، وتغطي خدماتنا كافة مناطق المملكة عبر شبكة توزيع متقدمة
+                مدعومة بأسطول حديث من شاحنات النقل المبرد والمجمد.
+            </p>
 
+            <p class="feature-title"><strong>مميزات المنظومة</strong></p>
 
-    <ul class="features">
-        <li>
-            <strong>الالتزام الصارم بمعايير السلامة الغذائية</strong><br>
-            نطبق إجراءات دقيقة للتعقيم والتخزين والتداول بما يتماشى مع أفضل
-            الممارسات العالمية ومعايير <strong>هيئة الغذاء والدواء السعودية (SFDA)</strong>.
+            <ul class="features">
+                <li>
+                    <strong>الالتزام الصارم بمعايير السلامة الغذائية</strong><br>
+                    نطبق إجراءات دقيقة للتعقيم والتخزين والتداول بما يتماشى مع أفضل
+                    الممارسات العالمية ومعايير <strong>هيئة الغذاء والدواء السعودية (SFDA)</strong>.
 
-        </li>
+                </li>
 
-        <li>
-            <strong>أسطول مجهز بالكامل</strong><br>
-            نمتلك شاحنات مبردة ومجمدة مطابقة لأعلى المعايير الأوروبية في النقل الغذائي.
-        </li>
+                <li>
+                    <strong>أسطول مجهز بالكامل</strong><br>
+                    نمتلك شاحنات مبردة ومجمدة مطابقة لأعلى المعايير الأوروبية في النقل الغذائي.
+                </li>
 
-        <li>
-            <strong>تحكم دقيق في درجات الحرارة</strong><br>
-            جميع المنتجات تُنقل ضمن درجات حرارة مراقبة بدقة للحفاظ على الجودة
-            وسلامة المنتج من المصدر وحتى نقطة البيع.
-        </li>
+                <li>
+                    <strong>تحكم دقيق في درجات الحرارة</strong><br>
+                    جميع المنتجات تُنقل ضمن درجات حرارة مراقبة بدقة للحفاظ على الجودة
+                    وسلامة المنتج من المصدر وحتى نقطة البيع.
+                </li>
 
-        <li>
-            <strong>نظام تتبع ذكي</strong><br>
-            نستخدم تقنيات تتبع آنية لمراقبة الموقع ودرجات الحرارة،
-            بما يضمن الشفافية الكاملة وسلامة النقل في جميع المراحل.
-        </li>
+                <li>
+                    <strong>نظام تتبع ذكي</strong><br>
+                    نستخدم تقنيات تتبع آنية لمراقبة الموقع ودرجات الحرارة،
+                    بما يضمن الشفافية الكاملة وسلامة النقل في جميع المراحل.
+                </li>
 
-        <li>
-            <strong>مراكز توزيع استراتيجية</strong><br>
-            مراكزنا موزعة بشكل استراتيجي لضمان سرعة التوصيل
-            وتقليل زمن التحميل والتسليم.
-        </li>
-    </ul>
+                <li>
+                    <strong>مراكز توزيع استراتيجية</strong><br>
+                    مراكزنا موزعة بشكل استراتيجي لضمان سرعة التوصيل
+                    وتقليل زمن التحميل والتسليم.
+                </li>
+            </ul>
+        </div>
+
+        <div class="logistics-img">
+            <img src="Img/Style/Logistics/car.png" alt="أسطول النقل">
+        </div>
+
+    </div>
 </section>
 
 <!-- التراخيص -->
@@ -178,5 +194,18 @@
     </div>
 </div>
 
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+
+    setInterval(nextSlide, 5000); // Change image every 5 seconds
+</script>
 
 <?php include 'footer.php'; ?>

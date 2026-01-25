@@ -1,15 +1,21 @@
 <?php include 'header.php'; ?>
 
-<!-- HERO -->
-<header class="hero">
-    <img src="Img/hero-image.png" alt="aljawad" class="hero-logo" fetchpriority="high" loading="eager">
-    <h1>Aljawad Premium – Hospitality & Food Supply Solutions</h1>
-    <p>Your trusted partner in <strong>hospitality</strong>, catering, and food supply services across Saudi Arabia.</p>
+<!-- HERO SLIDER -->
+<header class="hero-slider">
+    <div class="slide active" style="background-image: url('Img/Style/Slider/s1.png');"></div>
+    <div class="slide" style="background-image: url('Img/Style/Slider/s2.png');"></div>
+    <div class="slide" style="background-image: url('Img/Style/Slider/s3.png');"></div>
 
-
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1>Aljawad Premium – Hospitality & Food Supply Solutions</h1>
+            <p>Your trusted partner in <strong>hospitality</strong>, catering, and food supply services across Saudi
+                Arabia.</p>
+        </div>
+    </div>
 </header>
 
-<section id="about">
+<section id="about" class="bg-pattern">
     <h2>Who We Are & Our Presence</h2>
 
     <p>
@@ -41,42 +47,52 @@
 <section id="logistics">
     <h2>Our Logistics System</h2>
 
-    <p>
-        We operate a fully integrated logistics system that is considered one of the strongest in the frozen
-        food sector within the Kingdom. Our services cover all regions across Saudi Arabia through an advanced
-        distribution network.
-    </p>
+    <div class="logistics-container">
 
-    <p class="feature-title"><strong>Key Features</strong></p>
+        <div class="logistics-text">
+            <p style="margin: 0;">
+                We operate a fully integrated logistics system that is considered one of the strongest in the frozen
+                food sector within the Kingdom. Our services cover all regions across Saudi Arabia through an advanced
+                distribution network.
+            </p>
 
+            <p class="feature-title"><strong>Key Features</strong></p>
 
-    <ul class="features">
-        <li>
-            <strong>Strict Commitment to Food Safety Standards</strong><br>
-            Rigorous procedures for sanitation, storage, and handling in line with global best practices and
-            SFDA standards.
-        </li>
+            <ul class="features">
+                <li>
+                    <strong>Strict Commitment to Food Safety Standards</strong><br>
+                    Rigorous procedures for sanitation, storage, and handling in line with global best practices and
+                    SFDA standards.
+                </li>
 
-        <li>
-            <strong>Fully Equipped Fleet</strong><br>
-            Refrigerated and frozen trucks compliant with the highest European standards for food transportation.
-        </li>
+                <li>
+                    <strong>Fully Equipped Fleet</strong><br>
+                    Refrigerated and frozen trucks compliant with the highest European standards for food
+                    transportation.
+                </li>
 
-        <li>
-            <strong>Precise Temperature Control</strong><br>
-            Continuous temperature monitoring to ensure product safety from source to point of sale.
-        </li>
+                <li>
+                    <strong>Precise Temperature Control</strong><br>
+                    Continuous temperature monitoring to ensure product safety from source to point of sale.
+                </li>
 
-        <li>
-            <strong>Smart Tracking System</strong><br>
-            Real-time tracking technologies for location and temperature, ensuring transparency and safety.
-        </li>
+                <li>
+                    <strong>Smart Tracking System</strong><br>
+                    Real-time tracking technologies for location and temperature, ensuring transparency and safety.
+                </li>
 
-        <li>
-            <strong>Strategically Located Distribution Centers</strong><br>
-            Distribution hubs positioned to ensure fast delivery and reduced loading and delivery times.
-        </li>
-    </ul>
+                <li>
+                    <strong>Strategically Located Distribution Centers</strong><br>
+                    Distribution hubs positioned to ensure fast delivery and reduced loading and delivery times.
+                </li>
+            </ul>
+        </div>
+
+        <div class="logistics-img">
+            <img src="Img/Style/Logistics/car.png" alt="Logistics Fleet">
+        </div>
+
+    </div>
 </section>
 
 <!-- LICENSES -->
@@ -183,5 +199,18 @@
     </div>
 </div>
 
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+
+    setInterval(nextSlide, 5000); // Change image every 5 seconds
+</script>
 
 <?php include 'footer.php'; ?>

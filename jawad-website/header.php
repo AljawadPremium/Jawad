@@ -118,7 +118,7 @@ $switchLangUrl = $targetFile . ($queryString ? '?' . $queryString : '');
         <div class="nav-container">
 
             <!-- Logo -->
-            <img src="Img/logo.png" class="nav-logo" alt="Logo">
+            <img src="Img/Style/Logos/Black logo.png" class="nav-logo" alt="Logo">
 
             <!-- Navigation -->
             <ul>

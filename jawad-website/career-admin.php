@@ -23,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
     // We keep English fields in DB but fill them with Arabic data if the admin only provides Arabic
     $stmt->bind_param(
         "ssssssisssssssssss",
-        $_POST['title_ar'], // Using Arabic for English field as fallback
+        $_POST['title_en'],
         $_POST['title_ar'],
-        $_POST['description_ar'], // Using Arabic for English field as fallback
+        $_POST['description_en'],
         $_POST['description_ar'],
         $_POST['location'],
         $_POST['job_type'],
@@ -63,7 +63,7 @@ $applicants = $conn->query("
 // Fetch Existing Jobs in Arabic
 $jobs_list = $conn->query("SELECT id, title_ar FROM jobs ORDER BY id DESC");
 
-include 'header.php'; 
+include 'header.php';
 ?>
 
 <section class="career-admin" dir="rtl" style="text-align: right; padding: 40px 20px;">
@@ -81,13 +81,22 @@ include 'header.php';
             <form method="POST" class="admin-form">
                 <input type="hidden" name="add_job" value="1">
                 <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <div class="field full" style="grid-column: span 2;">
-                        <label>عنوان الوظيفة</label>
-                        <input type="text" name="title_ar" required style="width: 100%; padding: 10px;">
+                    <div class="field">
+                        <label>Job Title (English)</label>
+                        <input type="text" name="title_en" required style="width: 100%; padding: 10px;">
+                    </div>
+                    <div class="field">
+                        <label>عنوان الوظيفة (عربي)</label>
+                        <input type="text" name="title_ar" required style="width: 100%; padding: 10px; direction: rtl;">
                     </div>
                     <div class="field full" style="grid-column: span 2;">
-                        <label>وصف الوظيفة</label>
-                        <textarea name="description_ar" required style="width: 100%; height: 100px;"></textarea>
+                        <label>Job Description (English)</label>
+                        <textarea name="description_en" required style="width: 100%; height: 100px;"></textarea>
+                    </div>
+                    <div class="field full" style="grid-column: span 2;">
+                        <label>وصف الوظيفة (عربي)</label>
+                        <textarea name="description_ar" required
+                            style="width: 100%; height: 100px; direction: rtl;"></textarea>
                     </div>
                     <div class="field">
                         <label>الموقع (المدينة)</label>
@@ -118,7 +127,9 @@ include 'header.php';
                         <textarea name="requirements" style="width: 100%;"></textarea>
                     </div>
                 </div>
-                <button type="submit" class="admin-btn" style="background: var(--gold); color: white; padding: 12px 30px; border: none; margin-top: 20px; cursor: pointer; border-radius: 5px;">حفظ الوظيفة</button>
+                <button type="submit" class="admin-btn"
+                    style="background: var(--gold); color: white; padding: 12px 30px; border: none; margin-top: 20px; cursor: pointer; border-radius: 5px;">حفظ
+                    الوظيفة</button>
             </form>
         </div>
 
@@ -128,11 +139,13 @@ include 'header.php';
                 <p>لا يوجد وظائف حالياً.</p>
             <?php else: ?>
                 <?php while ($job = $jobs_list->fetch_assoc()): ?>
-                    <div class="job-row" style="display:flex; justify-content:space-between; padding:15px; border-bottom:1px solid #eee;">
+                    <div class="job-row"
+                        style="display:flex; justify-content:space-between; padding:15px; border-bottom:1px solid #eee;">
                         <span><?= htmlspecialchars($job['title_ar']) ?></span>
                         <div class="actions">
-                            <a href="career-edit.php?id=<?= $job['id'] ?>" style="color: blue;">تعديل</a> | 
-                            <a href="career-delete.php?id=<?= $job['id'] ?>" style="color:red;" onclick="return confirm('هل أنت متأكد من الحذف؟')">حذف</a>
+                            <a href="career-edit.php?id=<?= $job['id'] ?>" style="color: blue;">تعديل</a> |
+                            <a href="career-delete.php?id=<?= $job['id'] ?>" style="color:red;"
+                                onclick="return confirm('هل أنت متأكد من الحذف؟')">حذف</a>
                         </div>
                     </div>
                 <?php endwhile; ?>
@@ -158,15 +171,16 @@ include 'header.php';
                     </thead>
                     <tbody>
                         <?php while ($a = $applicants->fetch_assoc()): ?>
-                        <tr style="border-bottom: 1px solid #eee;">
-                            <td style="padding: 10px;"><?= htmlspecialchars($a['first_name'].' '.$a['last_name']) ?></td>
-                            <td><?= htmlspecialchars($a['title_ar']) ?></td>
-                            <td><a href="<?= htmlspecialchars($a['cv_file']) ?>" target="_blank" style="color: var(--gold);">تحميل CV</a></td>
-                            <td>
-                                <span class="status-badge"><?= htmlspecialchars($a['status']) ?></span>
-                            </td>
-                            <td><a href="applicant-view.php?id=<?= $a['id'] ?>" class="view-btn">عرض التفاصيل</a></td>
-                        </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 10px;"><?= htmlspecialchars($a['first_name'] . ' ' . $a['last_name']) ?></td>
+                                <td><?= htmlspecialchars($a['title_ar']) ?></td>
+                                <td><a href="<?= htmlspecialchars($a['cv_file']) ?>" target="_blank"
+                                        style="color: var(--gold);">تحميل CV</a></td>
+                                <td>
+                                    <span class="status-badge"><?= htmlspecialchars($a['status']) ?></span>
+                                </td>
+                                <td><a href="applicant-view.php?id=<?= $a['id'] ?>" class="view-btn">عرض التفاصيل</a></td>
+                            </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>
@@ -177,30 +191,63 @@ include 'header.php';
 </section>
 
 <script>
-function showTab(index) {
-    const jobsTab = document.getElementById('tab-jobs');
-    const applicantsTab = document.getElementById('tab-applicants');
-    const tabs = document.querySelectorAll('.tab');
+    function showTab(index) {
+        const jobsTab = document.getElementById('tab-jobs');
+        const applicantsTab = document.getElementById('tab-applicants');
+        const tabs = document.querySelectorAll('.tab');
 
-    tabs.forEach(t => t.classList.remove('active'));
-    tabs[index].classList.add('active');
+        tabs.forEach(t => t.classList.remove('active'));
+        tabs[index].classList.add('active');
 
-    if (index === 0) {
-        jobsTab.style.display = 'block';
-        applicantsTab.style.display = 'none';
-    } else {
-        jobsTab.style.display = 'none';
-        applicantsTab.style.display = 'block';
+        if (index === 0) {
+            jobsTab.style.display = 'block';
+            applicantsTab.style.display = 'none';
+        } else {
+            jobsTab.style.display = 'none';
+            applicantsTab.style.display = 'block';
+        }
     }
-}
 </script>
 
 <style>
-    .tab.active { background-color: var(--gold); color: white; border-radius: 5px; border: none; }
-    .tab { cursor: pointer; padding: 10px 25px; border: 1px solid #ddd; background: #f8f9fa; font-weight: bold; }
-    .admin-card { margin-top: 20px; border: 1px solid #ddd; padding: 25px; border-radius: 12px; background: white; }
-    .view-btn { background: #eee; padding: 5px 10px; border-radius: 4px; text-decoration: none; color: #333; font-size: 14px; }
-    label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+    .tab.active {
+        background-color: var(--gold);
+        color: white;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .tab {
+        cursor: pointer;
+        padding: 10px 25px;
+        border: 1px solid #ddd;
+        background: #f8f9fa;
+        font-weight: bold;
+    }
+
+    .admin-card {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        padding: 25px;
+        border-radius: 12px;
+        background: white;
+    }
+
+    .view-btn {
+        background: #eee;
+        padding: 5px 10px;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
 </style>
 
 <?php include 'footer.php'; ?>

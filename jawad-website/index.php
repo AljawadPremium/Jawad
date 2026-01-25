@@ -4,18 +4,23 @@
 <header class="hero-slider">
     <div class="slide active" style="background-image: url('Img/Style/Slider/s1.png');"></div>
     <div class="slide" style="background-image: url('Img/Style/Slider/s2.png');"></div>
-    <div class="slide" style="background-image: url('Img/Style/Slider/s3.png');"></div>
-
-    <div class="hero-overlay">
-        <div class="hero-content">
-            <h1>Aljawad Premium – Hospitality & Food Supply Solutions</h1>
-            <p>Your trusted partner in <strong>hospitality</strong>, catering, and food supply services across Saudi
-                Arabia.</p>
-        </div>
-    </div>
 </header>
 
 <section id="about" class="bg-pattern">
+
+    <!-- Moved Hero Content -->
+    <div style="text-align: center; margin-bottom: 40px;">
+        <img src="Img/logo2.png" alt="Aljawad Premium"
+            style="max-width: 250px; margin: 0 auto 20px auto; display: block;">
+        <h1 style="color: var(--gold); font-family: 'Moshreq', sans-serif; font-size: 36px; margin-bottom: 15px;">
+            Aljawad Premium – Hospitality & Food Supply Solutions
+        </h1>
+        <p style="font-size: 20px; color: #555;">
+            Your trusted partner in <strong>hospitality</strong>, catering, and food supply services across Saudi
+            Arabia.
+        </p>
+    </div>
+
     <h2>Who We Are & Our Presence</h2>
 
     <p>
@@ -113,7 +118,7 @@
         deliver.
     </p>
 
-    <img src="/aljawad/Img/sfda-logo.jpg" class="license-logo" alt="SFDA">
+    <img src="Img/sfda-logo.jpg" class="license-logo" alt="SFDA">
 </section>
 
 <!-- FACTORY -->

@@ -4,19 +4,23 @@
 <header class="hero-slider" dir="rtl">
     <div class="slide active" style="background-image: url('Img/Style/Slider/s1.png');"></div>
     <div class="slide" style="background-image: url('Img/Style/Slider/s2.png');"></div>
-    <div class="slide" style="background-image: url('Img/Style/Slider/s3.png');"></div>
-
-    <div class="hero-overlay">
-        <div class="hero-content">
-            <h1>الجواد بريميوم | خدمات الضيافة وتوريد الأغذية والخدمات اللوجستية</h1>
-            <p>شريككم الموثوق في <strong>خدمات الضيافة</strong> وتوريد الأغذية في جميع أنحاء المملكة العربية السعودية.
-            </p>
-        </div>
-    </div>
 </header>
 
 <!-- من نحن وتوسعنا -->
 <section id="about" dir="rtl" class="bg-pattern">
+
+    <!-- Moved Hero Content -->
+    <div style="text-align: center; margin-bottom: 40px;">
+        <img src="Img/logo2.png" alt="الجواد بريميوم"
+            style="max-width: 250px; margin: 0 auto 20px auto; display: block;">
+        <h1 style="color: var(--gold); font-family: 'Moshreq', sans-serif; font-size: 36px; margin-bottom: 15px;">
+            الجواد بريميوم | خدمات الضيافة وتوريد الأغذية والخدمات اللوجستية
+        </h1>
+        <p style="font-size: 20px; color: #555;">
+            شريككم الموثوق في <strong>خدمات الضيافة</strong> وتوريد الأغذية في جميع أنحاء المملكة العربية السعودية.
+        </p>
+    </div>
+
     <h2>من نحن وتوسعنا</h2>
 
     <p>
@@ -111,7 +115,7 @@
         العربية السعودية، حيث يُعد التزامنا أساس ثقة عملائنا وجودة ما نقدمه.
     </p>
 
-    <img src="/aljawad/Img/sfda-logo.jpg" class="license-logo" alt="SFDA">
+    <img src="Img/sfda-logo.jpg" class="license-logo" alt="SFDA">
 </section>
 
 <!-- مصنع الأغذية -->

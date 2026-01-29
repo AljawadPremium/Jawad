@@ -217,8 +217,9 @@ section {
 /* Pattern Background Class */
 .bg-pattern {
     background-image: url('Img/Style/Patterns/pattern3.png');
-    background-repeat: repeat;
-    background-size: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     /* Adjust scale */
     background-color: #fdfdfd;
     /* Fallback/Blend */

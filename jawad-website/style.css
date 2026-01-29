@@ -6,10 +6,17 @@ html {
     height: 100%;
 }
 
+@font-face {
+    font-family: 'Moshreq';
+    src: url('htf_mosh/HT_Moshreq_Pro-VF.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
+    font-family: "Moshreq", "Segoe UI", Arial, sans-serif;
     background-color: #ffffff;
     color: #3a3a3a;
     display: flex;
@@ -165,7 +172,6 @@ nav ul li a:hover {
     font-size: 48px;
     color: var(--gold);
     margin-bottom: 20px;
-    font-family: 'Moshreq', sans-serif;
 }
 
 .hero-content p {
@@ -252,7 +258,6 @@ section h2 {
     font-size: 36px;
     color: var(--gold);
     margin-bottom: 25px;
-    font-family: 'Moshreq', sans-serif;
 }
 
 section p {

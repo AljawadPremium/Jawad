@@ -12,11 +12,32 @@ if (!$id || !is_numeric($id)) { die("Invalid ID"); }
 
 // Handle Update
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $stmt = $conn->prepare("UPDATE jobs SET title_en=?, title_ar=?, description_en=?, description_ar=? WHERE id=?");
-    $stmt->bind_param("ssssi", $_POST['title_en'], $_POST['title_ar'], $_POST['description_en'], $_POST['description_ar'], $id);
-    $stmt->execute();
-    header("Location: career-admin.php?updated=1");
-    exit;
+    $stmt = $conn->prepare("
+        UPDATE jobs SET 
+            title_en=?, title_ar=?, description_en=?, description_ar=?, 
+            location=?, job_type=?, vacancies=?, salary=?, 
+            publish_date=?, end_date=?, requirements=?, requirements_en=?,
+            tasks=?, skills=?, qualifications=?, experience=?, 
+            work_period=?, languages=?, gender=?
+        WHERE id=?
+    ");
+    
+    $stmt->bind_param(
+        "ssssssissssssssssssi", 
+        $_POST['title_en'], $_POST['title_ar'], $_POST['description_en'], $_POST['description_ar'],
+        $_POST['location'], $_POST['job_type'], $_POST['vacancies'], $_POST['salary'],
+        $_POST['publish_date'], $_POST['end_date'], $_POST['requirements'], $_POST['requirements_en'],
+        $_POST['tasks'], $_POST['skills'], $_POST['qualifications'], $_POST['experience'],
+        $_POST['work_period'], $_POST['languages'], $_POST['gender'],
+        $id
+    );
+    
+    if ($stmt->execute()) {
+        header("Location: career-admin.php?updated=1");
+        exit;
+    } else {
+        $error = "Error updating job: " . $conn->error;
+    }
 }
 
 // Fetch current data
@@ -27,28 +48,91 @@ $job = $stmt->get_result()->fetch_assoc();
 include 'header.php';
 ?>
 
-<section class="career-admin">
-    <h2>Edit Job</h2>
+<section class="career-admin" style="padding: 40px 20px;">
+    <h2 style="color: var(--gold); margin-bottom: 30px;">تعديل الوظيفة</h2>
+    
+    <?php if (isset($error)): ?>
+        <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <?= $error ?>
+        </div>
+    <?php endif; ?>
+
     <div class="admin-card">
         <form method="POST" class="admin-form">
-            <div class="field">
-                <label>Title (EN)</label>
-                <input type="text" name="title_en" value="<?= htmlspecialchars($job['title_en']) ?>" required>
+            <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="field">
+                    <label>Job Title (English)</label>
+                    <input type="text" name="title_en" value="<?= htmlspecialchars($job['title_en']) ?>" required style="width: 100%; padding: 10px;">
+                </div>
+                <div class="field">
+                    <label>عنوان الوظيفة (عربي)</label>
+                    <input type="text" name="title_ar" value="<?= htmlspecialchars($job['title_ar']) ?>" required style="width: 100%; padding: 10px; direction: rtl;">
+                </div>
+                <div class="field full" style="grid-column: span 2;">
+                    <label>Job Description (English)</label>
+                    <textarea name="description_en" required style="width: 100%; height: 100px;"><?= htmlspecialchars($job['description_en']) ?></textarea>
+                </div>
+                <div class="field full" style="grid-column: span 2;">
+                    <label>وصف الوظيفة (عربي)</label>
+                    <textarea name="description_ar" required style="width: 100%; height: 100px; direction: rtl;"><?= htmlspecialchars($job['description_ar']) ?></textarea>
+                </div>
+                <div class="field">
+                    <label>الموقع (المدينة)</label>
+                    <input type="text" name="location" value="<?= htmlspecialchars($job['location']) ?>" style="width: 100%; padding: 10px;">
+                </div>
+                <div class="field">
+                    <label>نوع العمل</label>
+                    <select name="job_type" style="width: 100%; padding: 10px;">
+                        <?php 
+                        $types = [
+                            'Full-time' => 'دوام كامل (Full-time)',
+                            'Part-time' => 'دوام جزئي (Part-time)',
+                            'Contract' => 'عقد (Contract)',
+                            'Remote' => 'عمل عن بعد (Remote)',
+                            'Internship' => 'تدريب (Internship)'
+                        ];
+                        foreach ($types as $val => $label): ?>
+                            <option value="<?= $val ?>" <?= $job['job_type'] == $val ? 'selected' : '' ?>><?= $label ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>عدد الشواغر</label>
+                    <input type="number" name="vacancies" value="<?= htmlspecialchars($job['vacancies']) ?>" style="width: 100%; padding: 10px;">
+                </div>
+                <div class="field">
+                    <label>الراتب</label>
+                    <input type="text" name="salary" value="<?= htmlspecialchars($job['salary']) ?>" style="width: 100%; padding: 10px;">
+                </div>
+                <div class="field">
+                    <label>تاريخ النشر</label>
+                    <input type="date" name="publish_date" value="<?= $job['publish_date'] ?>" style="width: 100%; padding: 10px;">
+                </div>
+                <div class="field">
+                    <label>تاريخ الانتهاء</label>
+                    <input type="date" name="end_date" value="<?= $job['end_date'] ?>" style="width: 100%; padding: 10px;">
+                </div>
+                <div class="field full" style="grid-column: span 2;">
+                    <label>Requirements (English)</label>
+                    <textarea name="requirements_en" style="width: 100%; height: 80px;"><?= htmlspecialchars($job['requirements_en']) ?></textarea>
+                </div>
+                <div class="field full" style="grid-column: span 2;">
+                    <label>المتطلبات (عربي)</label>
+                    <textarea name="requirements" style="width: 100%; height: 80px; direction: rtl;"><?= htmlspecialchars($job['requirements']) ?></textarea>
+                </div>
+                <!-- Hidden fields to maintain existing structure if needed -->
+                <input type="hidden" name="tasks" value="<?= htmlspecialchars($job['tasks']) ?>">
+                <input type="hidden" name="skills" value="<?= htmlspecialchars($job['skills']) ?>">
+                <input type="hidden" name="qualifications" value="<?= htmlspecialchars($job['qualifications']) ?>">
+                <input type="hidden" name="experience" value="<?= htmlspecialchars($job['experience']) ?>">
+                <input type="hidden" name="work_period" value="<?= htmlspecialchars($job['work_period']) ?>">
+                <input type="hidden" name="languages" value="<?= htmlspecialchars($job['languages']) ?>">
+                <input type="hidden" name="gender" value="<?= htmlspecialchars($job['gender']) ?>">
             </div>
-            <div class="field">
-                <label>Title (AR)</label>
-                <input type="text" name="title_ar" value="<?= htmlspecialchars($job['title_ar']) ?>" required>
+            <div style="margin-top: 20px;">
+                <button type="submit" class="admin-btn" style="background: var(--gold); color: white; padding: 12px 30px; border: none; cursor: pointer; border-radius: 5px;">تحديث الوظيفة</button>
+                <a href="career-admin.php" style="margin-left: 15px; color: #666; text-decoration: none;">إلغاء</a>
             </div>
-            <div class="field full">
-                <label>Description (EN)</label>
-                <textarea name="description_en" required><?= htmlspecialchars($job['description_en']) ?></textarea>
-            </div>
-            <div class="field full">
-                <label>Description (AR)</label>
-                <textarea name="description_ar" required><?= htmlspecialchars($job['description_ar']) ?></textarea>
-            </div>
-            <button type="submit" class="admin-btn">Update Job</button>
-            <a href="career-admin.php">Cancel</a>
         </form>
     </div>
 </section>

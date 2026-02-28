@@ -14,44 +14,55 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
     // Basic fallbacks for English if missing
     $title_en = !empty($_POST['title_en']) ? $_POST['title_en'] : $_POST['title_ar'];
     $description_en = !empty($_POST['description_en']) ? $_POST['description_en'] : $_POST['description_ar'];
+    $requirements_en = !empty($_POST['requirements_en']) ? $_POST['requirements_en'] : $_POST['requirements'];
     
     // Default publish date if empty
     $publish_date = !empty($_POST['publish_date']) ? $_POST['publish_date'] : date('Y-m-d');
     $end_date = !empty($_POST['end_date']) ? $_POST['end_date'] : null;
 
-    $stmt = $conn->prepare("
-        INSERT INTO jobs (
-            title_en, title_ar, description_en, description_ar, location,
-            job_type, vacancies, salary, publish_date, end_date,
-            requirements, tasks, skills, qualifications, experience,
-            work_period, languages, gender
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ");
+    // Date validation
+    if ($end_date && $end_date < $publish_date) {
+        $error_msg = "خطأ: تاريخ الانتهاء لا يمكن أن يكون قبل تاريخ النشر.";
+    } else {
+        $stmt = $conn->prepare("
+            INSERT INTO jobs (
+                title_en, title_ar, description_en, description_ar, location,
+                job_type, vacancies, salary, publish_date, end_date,
+                requirements, requirements_en, tasks, skills, qualifications, experience,
+                work_period, languages, gender
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
 
-    $stmt->bind_param(
-        "ssssssisssssssssss",
-        $title_en,
-        $_POST['title_ar'],
-        $description_en,
-        $_POST['description_ar'],
-        $_POST['location'],
-        $_POST['job_type'],
-        $_POST['vacancies'],
-        $_POST['salary'],
-        $publish_date,
-        $end_date,
-        $_POST['requirements'],
-        $_POST['tasks'],
-        $_POST['skills'],
-        $_POST['qualifications'],
-        $_POST['experience'],
-        $_POST['work_period'],
-        $_POST['languages'],
-        $_POST['gender']
-    );
+        $stmt->bind_param(
+            "ssssssissssssssssss",
+            $title_en,
+            $_POST['title_ar'],
+            $description_en,
+            $_POST['description_ar'],
+            $_POST['location'],
+            $_POST['job_type'],
+            $_POST['vacancies'],
+            $_POST['salary'],
+            $publish_date,
+            $end_date,
+            $_POST['requirements'],
+            $requirements_en,
+            $_POST['tasks'],
+            $_POST['skills'],
+            $_POST['qualifications'],
+            $_POST['experience'],
+            $_POST['work_period'],
+            $_POST['languages'],
+            $_POST['gender']
+        );
 
-    $stmt->execute();
-    $stmt->close();
+        if ($stmt->execute()) {
+            $success_msg = "تمت إضافة الوظيفة بنجاح.";
+        } else {
+            $error_msg = "خطأ في إضافة الوظيفة: " . $conn->error;
+        }
+        $stmt->close();
+    }
 }
 
 /* =======================
@@ -76,6 +87,18 @@ include 'header.php';
 <section class="career-admin" dir="rtl" style="text-align: right; padding: 40px 20px;">
 
     <h2 style="color: var(--gold); margin-bottom: 30px;">لوحة تحكم التوظيف</h2>
+
+    <?php if (isset($error_msg)): ?>
+        <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <?= $error_msg ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($success_msg)): ?>
+        <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <?= $success_msg ?>
+        </div>
+    <?php endif; ?>
 
     <div class="admin-tabs" style="margin-bottom: 20px; display: flex; gap: 10px;">
         <button class="tab active" onclick="showTab(0)">➕ إضافة وظيفة</button>
@@ -110,8 +133,14 @@ include 'header.php';
                         <input type="text" name="location">
                     </div>
                     <div class="field">
-                        <label>نوع العمل (دوام كامل/جزئي)</label>
-                        <input type="text" name="job_type">
+                        <label>نوع العمل</label>
+                        <select name="job_type" style="width: 100%; padding: 10px;">
+                            <option value="Full-time">دوام كامل (Full-time)</option>
+                            <option value="Part-time">دوام جزئي (Part-time)</option>
+                            <option value="Contract">عقد (Contract)</option>
+                            <option value="Remote">عمل عن بعد (Remote)</option>
+                            <option value="Internship">تدريب (Internship)</option>
+                        </select>
                     </div>
                     <div class="field">
                         <label>عدد الشواغر</label>
@@ -130,8 +159,12 @@ include 'header.php';
                         <input type="date" name="end_date">
                     </div>
                     <div class="field full" style="grid-column: span 2;">
-                        <label>المتطلبات (ضع كل نقطة في سطر جديد)</label>
-                        <textarea name="requirements" style="width: 100%;"></textarea>
+                        <label>Requirements (English) - each point in a new line</label>
+                        <textarea name="requirements_en" style="width: 100%; height: 80px;"></textarea>
+                    </div>
+                    <div class="field full" style="grid-column: span 2;">
+                        <label>المتطلبات (عربي) - ضع كل نقطة في سطر جديد</label>
+                        <textarea name="requirements" style="width: 100%; height: 80px;"></textarea>
                     </div>
                 </div>
                 <button type="submit" class="admin-btn"

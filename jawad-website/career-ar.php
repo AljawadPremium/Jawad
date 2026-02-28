@@ -36,8 +36,18 @@
                 <h3><?= htmlspecialchars($job['title_ar']) ?></h3>
 
                 <p class="job-meta">
+                    <?php 
+                    $type_map = [
+                        'Full-time' => 'دوام كامل',
+                        'Part-time' => 'دوام جزئي',
+                        'Contract' => 'عقد',
+                        'Remote' => 'عمل عن بعد',
+                        'Internship' => 'تدريب'
+                    ];
+                    $display_type = $type_map[$job['job_type']] ?? $job['job_type'];
+                    ?>
                     📍 <?= htmlspecialchars($job['location']) ?> |
-                    🕒 <?= htmlspecialchars($job['job_type']) ?>
+                    🕒 <?= htmlspecialchars($display_type) ?>
                     <?php if (!empty($job['salary'])): ?>
                         | 💰 <?= htmlspecialchars($job['salary']) ?>
                     <?php endif; ?>

@@ -82,10 +82,11 @@ $switchLangUrl = $targetFile . ($queryString ? '?' . $queryString : '');
     <?php
     if (
         strpos($_SERVER['PHP_SELF'], 'career.php') !== false ||
-        strpos($_SERVER['PHP_SELF'], 'career-ar.php') !== false
+        strpos($_SERVER['PHP_SELF'], 'career-ar.php') !== false ||
+        strpos($_SERVER['PHP_SELF'], 'job-details.php') !== false
     ):
         ?>
-        <link rel="stylesheet" href="/careerStyle.css?v=10">
+        <link rel="stylesheet" href="/careerStyle.css?v=11">
     <?php endif; ?>
 
     <!-- Career admin page -->

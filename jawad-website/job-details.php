@@ -35,8 +35,8 @@ $display_description = ($lang === 'ar')
 
 // Helper function to render multi-line text into a bulleted list
 function renderBulletedList($text) {
-    if (empty(trim($text))) return;
-    $lines = explode("\n", trim($text));
+    if (empty(trim($text ?? ''))) return;
+    $lines = explode("\n", trim($text ?? ''));
     echo "<ul>";
     foreach ($lines as $line) {
         $line = trim($line);
@@ -94,63 +94,66 @@ function renderBulletedList($text) {
             <?php endif; ?>
         </div>
 
-        <?php 
-        $req = ($lang === 'ar') 
-            ? (!empty($job['requirements']) ? $job['requirements'] : $job['requirements_en'])
-            : (!empty($job['requirements_en']) ? $job['requirements_en'] : $job['requirements']);
-        
-        if (!empty(trim($req))): ?>
-            <div class="job-section">
-                <h3><?= $lang === 'ar' ? 'شروط الوظيفة' : 'Requirements' ?></h3>
-                <?php renderBulletedList($req); ?>
-            </div>
-        <?php endif; ?>
+        <!-- 2-Column Grid for Details -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;">
+            <?php 
+            $req = ($lang === 'ar') 
+                ? (!empty($job['requirements']) ? $job['requirements'] : $job['requirements_en'])
+                : (!empty($job['requirements_en']) ? $job['requirements_en'] : $job['requirements']);
+            
+            if (!empty(trim($req ?? ''))): ?>
+                <div class="job-section" style="margin-bottom: 0;">
+                    <h3><?= $lang === 'ar' ? 'شروط الوظيفة' : 'Requirements' ?></h3>
+                    <?php renderBulletedList($req); ?>
+                </div>
+            <?php endif; ?>
 
-        <?php if (!empty(trim($job['tasks']))): ?>
-            <div class="job-section">
-                <h3><?= $lang === 'ar' ? 'مهام الوظيفة' : 'Tasks' ?></h3>
-                <?php renderBulletedList($job['tasks']); ?>
-            </div>
-        <?php endif; ?>
+            <?php if (!empty(trim($job['tasks'] ?? ''))): ?>
+                <div class="job-section" style="margin-bottom: 0;">
+                    <h3><?= $lang === 'ar' ? 'مهام الوظيفة' : 'Tasks' ?></h3>
+                    <?php renderBulletedList($job['tasks']); ?>
+                </div>
+            <?php endif; ?>
 
-        <?php if (!empty(trim($job['skills']))): ?>
-            <div class="job-section">
-                <h3><?= $lang === 'ar' ? 'المهارات' : 'Skills' ?></h3>
-                <?php renderBulletedList($job['skills']); ?>
-            </div>
-        <?php endif; ?>
+            <?php if (!empty(trim($job['skills'] ?? ''))): ?>
+                <div class="job-section" style="margin-bottom: 0;">
+                    <h3><?= $lang === 'ar' ? 'المهارات' : 'Skills' ?></h3>
+                    <?php renderBulletedList($job['skills']); ?>
+                </div>
+            <?php endif; ?>
 
-        <?php if (!empty(trim($job['qualifications']))): ?>
-            <div class="job-section">
-                <h3><?= $lang === 'ar' ? 'المؤهلات' : 'Qualifications' ?></h3>
-                <?php renderBulletedList($job['qualifications']); ?>
-            </div>
-        <?php endif; ?>
+            <?php if (!empty(trim($job['qualifications'] ?? ''))): ?>
+                <div class="job-section" style="margin-bottom: 0;">
+                    <h3><?= $lang === 'ar' ? 'المؤهلات' : 'Qualifications' ?></h3>
+                    <?php renderBulletedList($job['qualifications']); ?>
+                </div>
+            <?php endif; ?>
 
-        <?php if (!empty(trim($job['experience']))): ?>
-            <div class="job-section">
-                <h3><?= $lang === 'ar' ? 'الخبرة' : 'Experience' ?></h3>
-                <?php renderBulletedList($job['experience']); ?>
-            </div>
-        <?php endif; ?>
+            <?php if (!empty(trim($job['experience'] ?? ''))): ?>
+                <div class="job-section" style="margin-bottom: 0;">
+                    <h3><?= $lang === 'ar' ? 'الخبرة' : 'Experience' ?></h3>
+                    <?php renderBulletedList($job['experience']); ?>
+                </div>
+            <?php endif; ?>
 
-        <?php if (!empty(trim($job['languages']))): ?>
-            <div class="job-section">
-                <h3><?= $lang === 'ar' ? 'اللغات' : 'Languages' ?></h3>
-                <p style="color: #555; font-size: 16px; margin: 0; padding-<?= $lang === 'ar' ? 'right' : 'left' ?>: 25px;">
-                    <?= htmlspecialchars($job['languages']) ?>
-                </p>
-            </div>
-        <?php endif; ?>
+            <?php if (!empty(trim($job['languages'] ?? ''))): ?>
+                <div class="job-section" style="margin-bottom: 0;">
+                    <h3><?= $lang === 'ar' ? 'اللغات' : 'Languages' ?></h3>
+                    <p style="color: #555; font-size: 16px; margin: 0; padding-<?= $lang === 'ar' ? 'right' : 'left' ?>: 25px;">
+                        <?= htmlspecialchars($job['languages']) ?>
+                    </p>
+                </div>
+            <?php endif; ?>
 
-        <?php if (!empty(trim($job['gender']))): ?>
-            <div class="job-section">
-                <h3><?= $lang === 'ar' ? 'الجنس' : 'Gender' ?></h3>
-                <p style="color: #555; font-size: 16px; margin: 0; padding-<?= $lang === 'ar' ? 'right' : 'left' ?>: 25px;">
-                    <?= htmlspecialchars($job['gender']) ?>
-                </p>
-            </div>
-        <?php endif; ?>
+            <?php if (!empty(trim($job['gender'] ?? ''))): ?>
+                <div class="job-section" style="margin-bottom: 0;">
+                    <h3><?= $lang === 'ar' ? 'الجنس' : 'Gender' ?></h3>
+                    <p style="color: #555; font-size: 16px; margin: 0; padding-<?= $lang === 'ar' ? 'right' : 'left' ?>: 25px;">
+                        <?= htmlspecialchars($job['gender']) ?>
+                    </p>
+                </div>
+            <?php endif; ?>
+        </div>
 
         <div class="job-actions">
             <a href="apply.php?job_id=<?= $job['id'] ?>&lang=<?= $lang ?>" class="btn-primary">

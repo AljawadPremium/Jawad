@@ -45,8 +45,9 @@
                         'Internship' => 'تدريب'
                     ];
                     $display_type = $type_map[$job['job_type']] ?? $job['job_type'];
+                    $display_location = !empty($job['location']) ? $job['location'] : ($job['location_en'] ?? '');
                     ?>
-                    📍 <?= htmlspecialchars($job['location']) ?> |
+                    📍 <?= htmlspecialchars($display_location) ?> |
                     🕒 <?= htmlspecialchars($display_type) ?>
                     <?php if (!empty($job['salary'])): ?>
                         | 💰 <?= htmlspecialchars($job['salary']) ?>

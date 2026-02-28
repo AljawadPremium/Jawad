@@ -36,7 +36,8 @@
                 <h3><?= htmlspecialchars($job['title_en']) ?></h3>
 
                 <p class="job-meta">
-                    📍 <?= htmlspecialchars($job['location']) ?> |
+                    <?php $display_location = !empty($job['location_en']) ? $job['location_en'] : ($job['location'] ?? ''); ?>
+                    📍 <?= htmlspecialchars($display_location) ?> |
                     🕒 <?= htmlspecialchars($job['job_type']) ?>
                     <?php if (!empty($job['salary'])): ?>
                         | 💰 <?= htmlspecialchars($job['salary']) ?>

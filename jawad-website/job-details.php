@@ -61,7 +61,12 @@ function renderBulletedList($text) {
         <div class="job-meta-grid">
             <div>
                 <span><?= $lang === 'ar' ? 'الموقع' : 'Location' ?></span>
-                <?= htmlspecialchars($job['location']) ?>
+                <?php 
+                $display_location = ($lang === 'ar')
+                    ? (!empty($job['location']) ? $job['location'] : ($job['location_en'] ?? ''))
+                    : (!empty($job['location_en']) ? $job['location_en'] : ($job['location'] ?? ''));
+                echo htmlspecialchars($display_location);
+                ?>
             </div>
             <div>
                 <span><?= $lang === 'ar' ? 'نوع العمل' : 'Job Type' ?></span>

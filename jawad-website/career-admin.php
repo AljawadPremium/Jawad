@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
     $title_en = !empty($_POST['title_en']) ? $_POST['title_en'] : $_POST['title_ar'];
     $description_en = !empty($_POST['description_en']) ? $_POST['description_en'] : $_POST['description_ar'];
     $requirements_en = !empty($_POST['requirements_en']) ? $_POST['requirements_en'] : $_POST['requirements'];
+    $location_en = !empty($_POST['location_en']) ? $_POST['location_en'] : $_POST['location'];
     
     // Default publish date if empty
     $publish_date = !empty($_POST['publish_date']) ? $_POST['publish_date'] : date('Y-m-d');
@@ -26,20 +27,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
     } else {
         $stmt = $conn->prepare("
             INSERT INTO jobs (
-                title_en, title_ar, description_en, description_ar, location,
+                title_en, title_ar, description_en, description_ar, location, location_en,
                 job_type, vacancies, salary, publish_date, end_date,
                 requirements, requirements_en, tasks, skills, qualifications, experience,
                 work_period, languages, gender
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
 
         $stmt->bind_param(
-            "ssssssissssssssssss",
+            "sssssssissssssssssss",
             $title_en,
             $_POST['title_ar'],
             $description_en,
             $_POST['description_ar'],
             $_POST['location'],
+            $location_en,
             $_POST['job_type'],
             $_POST['vacancies'],
             $_POST['salary'],
@@ -129,8 +131,12 @@ include 'header.php';
                             style="width: 100%; height: 100px; direction: rtl;"></textarea>
                     </div>
                     <div class="field">
-                        <label>الموقع (المدينة)</label>
-                        <input type="text" name="location">
+                        <label>Location (English)</label>
+                        <input type="text" name="location_en" required style="width: 100%; padding: 10px;">
+                    </div>
+                    <div class="field">
+                        <label>الموقع (المدينة - عربي)</label>
+                        <input type="text" name="location" required style="width: 100%; padding: 10px; direction: rtl;">
                     </div>
                     <div class="field">
                         <label>نوع العمل</label>

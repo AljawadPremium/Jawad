@@ -12,10 +12,12 @@ if (!$id || !is_numeric($id)) { die("Invalid ID"); }
 
 // Handle Update
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $location_en = !empty($_POST['location_en']) ? $_POST['location_en'] : $_POST['location'];
+    
     $stmt = $conn->prepare("
         UPDATE jobs SET 
             title_en=?, title_ar=?, description_en=?, description_ar=?, 
-            location=?, job_type=?, vacancies=?, salary=?, 
+            location=?, location_en=?, job_type=?, vacancies=?, salary=?, 
             publish_date=?, end_date=?, requirements=?, requirements_en=?,
             tasks=?, skills=?, qualifications=?, experience=?, 
             work_period=?, languages=?, gender=?
@@ -23,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ");
     
     $stmt->bind_param(
-        "ssssssissssssssssssi", 
+        "sssssssissssssssssssi", 
         $_POST['title_en'], $_POST['title_ar'], $_POST['description_en'], $_POST['description_ar'],
-        $_POST['location'], $_POST['job_type'], $_POST['vacancies'], $_POST['salary'],
+        $_POST['location'], $location_en, $_POST['job_type'], $_POST['vacancies'], $_POST['salary'],
         $_POST['publish_date'], $_POST['end_date'], $_POST['requirements'], $_POST['requirements_en'],
         $_POST['tasks'], $_POST['skills'], $_POST['qualifications'], $_POST['experience'],
         $_POST['work_period'], $_POST['languages'], $_POST['gender'],
@@ -77,8 +79,12 @@ include 'header.php';
                     <textarea name="description_ar" required style="width: 100%; height: 100px; direction: rtl;"><?= htmlspecialchars($job['description_ar'] ?? '') ?></textarea>
                 </div>
                 <div class="field">
-                    <label>الموقع (المدينة)</label>
-                    <input type="text" name="location" value="<?= htmlspecialchars($job['location'] ?? '') ?>" style="width: 100%; padding: 10px;">
+                    <label>Location (English)</label>
+                    <input type="text" name="location_en" value="<?= htmlspecialchars($job['location_en'] ?? '') ?>" required style="width: 100%; padding: 10px;">
+                </div>
+                <div class="field">
+                    <label>الموقع (المدينة - عربي)</label>
+                    <input type="text" name="location" value="<?= htmlspecialchars($job['location'] ?? '') ?>" required style="width: 100%; padding: 10px; direction: rtl;">
                 </div>
                 <div class="field">
                     <label>نوع العمل</label>

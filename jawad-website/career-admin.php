@@ -70,15 +70,56 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
 /* =======================
     FETCH DATA
 ======================= */
+// Build Filter Conditions
+$where_clauses = [];
+$params = [];
+$types = "";
+
+if (!empty($_GET['nationality'])) {
+    $where_clauses[] = "a.nationality = ?";
+    $params[] = $_GET['nationality'];
+    $types .= "s";
+}
+if (!empty($_GET['education_level'])) {
+    $where_clauses[] = "a.education_level = ?";
+    $params[] = $_GET['education_level'];
+    $types .= "s";
+}
+if (isset($_GET['experience_years']) && $_GET['experience_years'] !== '') {
+    $where_clauses[] = "a.experience_years = ?";
+    $params[] = $_GET['experience_years'];
+    $types .= "i";
+}
+if (!empty($_GET['status'])) {
+    $where_clauses[] = "a.status = ?";
+    $params[] = $_GET['status'];
+    $types .= "s";
+}
+
+$where_sql = "";
+if (count($where_clauses) > 0) {
+    $where_sql = "WHERE " . implode(" AND ", $where_clauses);
+}
+
 // Fetch Applicants - Joining to get Arabic Job Title
-$applicants = $conn->query("
+$sql = "
     SELECT 
         a.id, a.first_name, a.last_name, a.email, a.phone, a.cv_file, a.status,
         j.title_ar
     FROM job_applications a
     JOIN jobs j ON a.job_id = j.id
+    $where_sql
     ORDER BY a.id DESC
-");
+";
+
+if (!empty($params)) {
+    $stmt_app = $conn->prepare($sql);
+    $stmt_app->bind_param($types, ...$params);
+    $stmt_app->execute();
+    $applicants = $stmt_app->get_result();
+} else {
+    $applicants = $conn->query($sql);
+}
 
 // Fetch Existing Jobs in Arabic
 $jobs_list = $conn->query("SELECT id, title_ar FROM jobs ORDER BY id DESC");
@@ -103,8 +144,8 @@ include 'header.php';
     <?php endif; ?>
 
     <div class="admin-tabs" style="margin-bottom: 20px; display: flex; gap: 10px;">
-        <button class="tab active" onclick="showTab(0)">➕ إضافة وظيفة</button>
-        <button class="tab" onclick="showTab(1)">📄 المتقدمين</button>
+        <button class="tab <?= ($_GET['tab'] ?? '') !== 'applicants' ? 'active' : '' ?>" onclick="showTab(0)">➕ إضافة وظيفة</button>
+        <button class="tab <?= ($_GET['tab'] ?? '') === 'applicants' ? 'active' : '' ?>" onclick="showTab(1)">📄 المتقدمين</button>
     </div>
 
     <div id="tab-jobs">
@@ -201,6 +242,60 @@ include 'header.php';
 
     <div id="tab-applicants" style="display:none;">
         <div class="admin-card">
+            <h3>تصفية المتقدمين (Filters)</h3>
+            <form method="GET" style="display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-end; flex-wrap: wrap;">
+                <input type="hidden" name="tab" value="applicants">
+                
+                <div style="flex: 1; min-width: 150px;">
+                    <label style="font-size: 13px;">الجنسية / Nationality</label>
+                    <select name="nationality" style="width: 100%; padding: 8px;">
+                        <option value="">الكل (All)</option>
+                        <option value="Saudi" <?= ($_GET['nationality'] ?? '') === 'Saudi' ? 'selected' : '' ?>>سعودي</option>
+                        <option value="Non-Saudi" <?= ($_GET['nationality'] ?? '') === 'Non-Saudi' ? 'selected' : '' ?>>غير سعودي</option>
+                    </select>
+                </div>
+                <div style="flex: 1; min-width: 150px;">
+                    <label style="font-size: 13px;">المستوى التعليمي / Education</label>
+                    <select name="education_level" style="width: 100%; padding: 8px;">
+                        <option value="">الكل (All)</option>
+                        <option value="High School" <?= ($_GET['education_level'] ?? '') === 'High School' ? 'selected' : '' ?>>ثانوي</option>
+                        <option value="Diploma" <?= ($_GET['education_level'] ?? '') === 'Diploma' ? 'selected' : '' ?>>دبلوم</option>
+                        <option value="Bachelor" <?= ($_GET['education_level'] ?? '') === 'Bachelor' ? 'selected' : '' ?>>بكالوريوس</option>
+                        <option value="Master" <?= ($_GET['education_level'] ?? '') === 'Master' ? 'selected' : '' ?>>ماجستير</option>
+                        <option value="PhD" <?= ($_GET['education_level'] ?? '') === 'PhD' ? 'selected' : '' ?>>دكتوراه</option>
+                    </select>
+                </div>
+                <div style="flex: 1; min-width: 150px;">
+                    <label style="font-size: 13px;">سنوات الخبرة / Experience</label>
+                    <select name="experience_years" style="width: 100%; padding: 8px;">
+                        <option value="">الكل (All)</option>
+                        <option value="0" <?= iisset($_GET['experience_years']) && $_GET['experience_years'] === '0' ? 'selected' : '' ?>>بدون خبرة</option>
+                        <option value="1" <?= ($_GET['experience_years'] ?? '') === '1' ? 'selected' : '' ?>>1 سنة</option>
+                        <option value="2" <?= ($_GET['experience_years'] ?? '') === '2' ? 'selected' : '' ?>>2 سنوات</option>
+                        <option value="3" <?= ($_GET['experience_years'] ?? '') === '3' ? 'selected' : '' ?>>3 سنوات</option>
+                        <option value="4" <?= ($_GET['experience_years'] ?? '') === '4' ? 'selected' : '' ?>>4 سنوات</option>
+                        <option value="5" <?= ($_GET['experience_years'] ?? '') === '5' ? 'selected' : '' ?>>5+ سنوات</option>
+                    </select>
+                </div>
+                <div style="flex: 1; min-width: 150px;">
+                    <label style="font-size: 13px;">الحالة / Status</label>
+                    <select name="status" style="width: 100%; padding: 8px;">
+                        <option value="">الكل (All)</option>
+                        <option value="pending" <?= ($_GET['status'] ?? '') === 'pending' ? 'selected' : '' ?>>قيد الانتظار</option>
+                        <option value="review" <?= ($_GET['status'] ?? '') === 'review' ? 'selected' : '' ?>>مراجعة</option>
+                        <option value="interview" <?= ($_GET['status'] ?? '') === 'interview' ? 'selected' : '' ?>>مقابلة</option>
+                        <option value="accepted" <?= ($_GET['status'] ?? '') === 'accepted' ? 'selected' : '' ?>>مقبول</option>
+                        <option value="rejected" <?= ($_GET['status'] ?? '') === 'rejected' ? 'selected' : '' ?>>مرفوض</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" style="padding: 8px 20px; background: var(--gold); color: white; border: none; cursor: pointer; border-radius: 4px;">تصفية</button>
+                    <a href="career-admin.php?tab=applicants" style="padding: 9px 20px; background: #eee; color: #333; text-decoration: none; border-radius: 4px; margin-right:5px;">إلغاء</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="admin-card">
             <h3>قائمة المتقدمين</h3>
             <?php if (!$applicants || $applicants->num_rows === 0): ?>
                 <p>لا يوجد طلبات توظيف حالياً.</p>
@@ -223,7 +318,18 @@ include 'header.php';
                                 <td><a href="<?= htmlspecialchars($a['cv_file']) ?>" target="_blank"
                                         style="color: var(--gold);">تحميل CV</a></td>
                                 <td>
-                                    <span class="status-badge"><?= htmlspecialchars($a['status']) ?></span>
+                                    <?php 
+                                        $status_map = [
+                                            'pending' => 'قيد الانتظار',
+                                            'review' => 'مراجعة',
+                                            'interview' => 'مقابلة',
+                                            'accepted' => 'مقبول',
+                                            'rejected' => 'مرفوض'
+                                        ];
+                                        $display_status = $status_map[$a['status']] ?? $a['status'];
+                                        $status_class = 'status-' . strtolower($a['status']);
+                                    ?>
+                                    <span class="status-badge <?= $status_class ?>"><?= htmlspecialchars($display_status) ?></span>
                                 </td>
                                 <td><a href="applicant-view.php?id=<?= $a['id'] ?>" class="view-btn">عرض التفاصيل</a></td>
                             </tr>
@@ -237,6 +343,15 @@ include 'header.php';
 </section>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('tab') === 'applicants') {
+            showTab(1);
+        } else {
+            showTab(0);
+        }
+    });
+
     function showTab(index) {
         const jobsTab = document.getElementById('tab-jobs');
         const applicantsTab = document.getElementById('tab-applicants');
@@ -294,6 +409,21 @@ include 'header.php';
         font-weight: bold;
         color: #555;
     }
+
+    /* Status Badges Styling */
+    .status-badge {
+        padding: 5px 12px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: bold;
+        display: inline-block;
+        white-space: nowrap;
+    }
+    .status-pending { background: #fdf0d5; color: #b58a3c; } 
+    .status-review { background: #e0f0ff; color: #0056b3; } 
+    .status-interview { background: #f0e6ff; color: #6f42c1; } 
+    .status-accepted { background: #d4edda; color: #155724; } 
+    .status-rejected { background: #f8d7da; color: #721c24; }
 </style>
 
 <?php include 'footer.php'; ?>

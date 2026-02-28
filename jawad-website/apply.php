@@ -157,7 +157,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="date" name="birth_date">
                 <input type="text" name="birth_place" placeholder="<?= $lang === 'ar' ? 'مكان الميلاد' : 'Birth Place' ?>">
                 <input type="text" name="gender" placeholder="<?= $lang === 'ar' ? 'الجنس' : 'Gender' ?>">
-                <input type="text" name="nationality" placeholder="<?= $lang === 'ar' ? 'الجنسية' : 'Nationality' ?>">
+                <select name="nationality" required>
+                    <option value="" disabled selected><?= $lang === 'ar' ? 'الجنسية' : 'Nationality' ?></option>
+                    <option value="Saudi"><?= $lang === 'ar' ? 'سعودي' : 'Saudi' ?></option>
+                    <option value="Non-Saudi"><?= $lang === 'ar' ? 'غير سعودي' : 'Non-Saudi' ?></option>
+                </select>
             </div>
 
             <h3><?= $lang === 'ar' ? 'معلومات التواصل' : 'Contact Information' ?></h3>
@@ -174,8 +178,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <h3><?= $lang === 'ar' ? 'المؤهلات والخبرة' : 'Qualifications & Experience' ?></h3>
             <div class="form-grid">
-                <input type="text" name="education_level"
-                    placeholder="<?= $lang === 'ar' ? 'المستوى التعليمي' : 'Education Level' ?>" required>
+                <select name="education_level" required>
+                    <option value="" disabled selected><?= $lang === 'ar' ? 'المستوى التعليمي' : 'Education Level' ?></option>
+                    <option value="High School"><?= $lang === 'ar' ? 'ثانوي' : 'High School' ?></option>
+                    <option value="Diploma"><?= $lang === 'ar' ? 'دبلوم' : 'Diploma' ?></option>
+                    <option value="Bachelor"><?= $lang === 'ar' ? 'بكالوريوس' : 'Bachelor' ?></option>
+                    <option value="Master"><?= $lang === 'ar' ? 'ماجستير' : 'Master' ?></option>
+                    <option value="PhD"><?= $lang === 'ar' ? 'دكتوراه' : 'PhD' ?></option>
+                </select>
                 <input type="text" name="qualification" placeholder="<?= $lang === 'ar' ? 'المؤهل' : 'Qualification' ?>"
                     required>
                 <input type="text" name="major" placeholder="<?= $lang === 'ar' ? 'التخصص' : 'Major' ?>" required>
@@ -185,8 +195,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     placeholder="<?= $lang === 'ar' ? 'الدورات' : 'Courses' ?>"></textarea>
                 <textarea class="full" name="experience_details"
                     placeholder="<?= $lang === 'ar' ? 'الخبرات السابقة' : 'Experience Details' ?>"></textarea>
-                <input type="text" name="experience_years"
-                    placeholder="<?= $lang === 'ar' ? 'سنوات الخبرة' : 'Years of Experience' ?>" required>
+                <select name="experience_years" required>
+                    <option value="" disabled selected><?= $lang === 'ar' ? 'سنوات الخبرة' : 'Years of Experience' ?></option>
+                    <option value="0"><?= $lang === 'ar' ? 'بدون خبرة' : 'No Experience' ?></option>
+                    <option value="1"><?= $lang === 'ar' ? 'سنة واحدة' : '1 Year' ?></option>
+                    <option value="2"><?= $lang === 'ar' ? 'سنتين' : '2 Years' ?></option>
+                    <option value="3"><?= $lang === 'ar' ? '3 سنوات' : '3 Years' ?></option>
+                    <option value="4"><?= $lang === 'ar' ? '4 سنوات' : '4 Years' ?></option>
+                    <option value="5"><?= $lang === 'ar' ? '5 سنوات فأكثر' : '5+ Years' ?></option>
+                </select>
             </div>
 
             <h3><?= $lang === 'ar' ? 'السيرة الذاتية' : 'Curriculum Vitae' ?></h3>

@@ -62,23 +62,23 @@ include 'header.php';
             <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div class="field">
                     <label>Job Title (English)</label>
-                    <input type="text" name="title_en" value="<?= htmlspecialchars($job['title_en']) ?>" required style="width: 100%; padding: 10px;">
+                    <input type="text" name="title_en" value="<?= htmlspecialchars($job['title_en'] ?? '') ?>" required style="width: 100%; padding: 10px;">
                 </div>
                 <div class="field">
                     <label>عنوان الوظيفة (عربي)</label>
-                    <input type="text" name="title_ar" value="<?= htmlspecialchars($job['title_ar']) ?>" required style="width: 100%; padding: 10px; direction: rtl;">
+                    <input type="text" name="title_ar" value="<?= htmlspecialchars($job['title_ar'] ?? '') ?>" required style="width: 100%; padding: 10px; direction: rtl;">
                 </div>
                 <div class="field full" style="grid-column: span 2;">
                     <label>Job Description (English)</label>
-                    <textarea name="description_en" required style="width: 100%; height: 100px;"><?= htmlspecialchars($job['description_en']) ?></textarea>
+                    <textarea name="description_en" required style="width: 100%; height: 100px;"><?= htmlspecialchars($job['description_en'] ?? '') ?></textarea>
                 </div>
                 <div class="field full" style="grid-column: span 2;">
                     <label>وصف الوظيفة (عربي)</label>
-                    <textarea name="description_ar" required style="width: 100%; height: 100px; direction: rtl;"><?= htmlspecialchars($job['description_ar']) ?></textarea>
+                    <textarea name="description_ar" required style="width: 100%; height: 100px; direction: rtl;"><?= htmlspecialchars($job['description_ar'] ?? '') ?></textarea>
                 </div>
                 <div class="field">
                     <label>الموقع (المدينة)</label>
-                    <input type="text" name="location" value="<?= htmlspecialchars($job['location']) ?>" style="width: 100%; padding: 10px;">
+                    <input type="text" name="location" value="<?= htmlspecialchars($job['location'] ?? '') ?>" style="width: 100%; padding: 10px;">
                 </div>
                 <div class="field">
                     <label>نوع العمل</label>
@@ -92,42 +92,42 @@ include 'header.php';
                             'Internship' => 'تدريب (Internship)'
                         ];
                         foreach ($types as $val => $label): ?>
-                            <option value="<?= $val ?>" <?= $job['job_type'] == $val ? 'selected' : '' ?>><?= $label ?></option>
+                            <option value="<?= $val ?>" <?= ($job['job_type'] ?? '') == $val ? 'selected' : '' ?>><?= $label ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="field">
                     <label>عدد الشواغر</label>
-                    <input type="number" name="vacancies" value="<?= htmlspecialchars($job['vacancies']) ?>" style="width: 100%; padding: 10px;">
+                    <input type="number" name="vacancies" value="<?= htmlspecialchars($job['vacancies'] ?? '') ?>" style="width: 100%; padding: 10px;">
                 </div>
                 <div class="field">
                     <label>الراتب</label>
-                    <input type="text" name="salary" value="<?= htmlspecialchars($job['salary']) ?>" style="width: 100%; padding: 10px;">
+                    <input type="text" name="salary" value="<?= htmlspecialchars($job['salary'] ?? '') ?>" style="width: 100%; padding: 10px;">
                 </div>
                 <div class="field">
                     <label>تاريخ النشر</label>
-                    <input type="date" name="publish_date" value="<?= $job['publish_date'] ?>" style="width: 100%; padding: 10px;">
+                    <input type="date" name="publish_date" value="<?= htmlspecialchars($job['publish_date'] ?? '') ?>" style="width: 100%; padding: 10px;">
                 </div>
                 <div class="field">
                     <label>تاريخ الانتهاء</label>
-                    <input type="date" name="end_date" value="<?= $job['end_date'] ?>" style="width: 100%; padding: 10px;">
+                    <input type="date" name="end_date" value="<?= htmlspecialchars($job['end_date'] ?? '') ?>" style="width: 100%; padding: 10px;">
                 </div>
                 <div class="field full" style="grid-column: span 2;">
                     <label>Requirements (English)</label>
-                    <textarea name="requirements_en" style="width: 100%; height: 80px;"><?= htmlspecialchars($job['requirements_en']) ?></textarea>
+                    <textarea name="requirements_en" style="width: 100%; height: 80px;"><?= htmlspecialchars($job['requirements_en'] ?? '') ?></textarea>
                 </div>
                 <div class="field full" style="grid-column: span 2;">
                     <label>المتطلبات (عربي)</label>
-                    <textarea name="requirements" style="width: 100%; height: 80px; direction: rtl;"><?= htmlspecialchars($job['requirements']) ?></textarea>
+                    <textarea name="requirements" style="width: 100%; height: 80px; direction: rtl;"><?= htmlspecialchars($job['requirements'] ?? '') ?></textarea>
                 </div>
                 <!-- Hidden fields to maintain existing structure if needed -->
-                <input type="hidden" name="tasks" value="<?= htmlspecialchars($job['tasks']) ?>">
-                <input type="hidden" name="skills" value="<?= htmlspecialchars($job['skills']) ?>">
-                <input type="hidden" name="qualifications" value="<?= htmlspecialchars($job['qualifications']) ?>">
-                <input type="hidden" name="experience" value="<?= htmlspecialchars($job['experience']) ?>">
-                <input type="hidden" name="work_period" value="<?= htmlspecialchars($job['work_period']) ?>">
-                <input type="hidden" name="languages" value="<?= htmlspecialchars($job['languages']) ?>">
-                <input type="hidden" name="gender" value="<?= htmlspecialchars($job['gender']) ?>">
+                <input type="hidden" name="tasks" value="<?= htmlspecialchars($job['tasks'] ?? '') ?>">
+                <input type="hidden" name="skills" value="<?= htmlspecialchars($job['skills'] ?? '') ?>">
+                <input type="hidden" name="qualifications" value="<?= htmlspecialchars($job['qualifications'] ?? '') ?>">
+                <input type="hidden" name="experience" value="<?= htmlspecialchars($job['experience'] ?? '') ?>">
+                <input type="hidden" name="work_period" value="<?= htmlspecialchars($job['work_period'] ?? '') ?>">
+                <input type="hidden" name="languages" value="<?= htmlspecialchars($job['languages'] ?? '') ?>">
+                <input type="hidden" name="gender" value="<?= htmlspecialchars($job['gender'] ?? '') ?>">
             </div>
             <div style="margin-top: 20px;">
                 <button type="submit" class="admin-btn" style="background: var(--gold); color: white; padding: 12px 30px; border: none; cursor: pointer; border-radius: 5px;">تحديث الوظيفة</button>

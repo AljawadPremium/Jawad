@@ -160,7 +160,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <select name="nationality" required>
                     <option value="" disabled selected><?= $lang === 'ar' ? 'الجنسية' : 'Nationality' ?></option>
                     <option value="Saudi"><?= $lang === 'ar' ? 'سعودي' : 'Saudi' ?></option>
-                    <option value="Non-Saudi"><?= $lang === 'ar' ? 'غير سعودي' : 'Non-Saudi' ?></option>
+                    <option value="UAE"><?= $lang === 'ar' ? 'إماراتي' : 'UAE' ?></option>
+                    <option value="Kuwaiti"><?= $lang === 'ar' ? 'كويتي' : 'Kuwaiti' ?></option>
+                    <option value="Qatari"><?= $lang === 'ar' ? 'قطري' : 'Qatari' ?></option>
+                    <option value="Bahraini"><?= $lang === 'ar' ? 'بحريني' : 'Bahraini' ?></option>
+                    <option value="Omani"><?= $lang === 'ar' ? 'عماني' : 'Omani' ?></option>
+                    <option value="Egyptian"><?= $lang === 'ar' ? 'مصري' : 'Egyptian' ?></option>
+                    <option value="Jordanian"><?= $lang === 'ar' ? 'أردني' : 'Jordanian' ?></option>
+                    <option value="Syrian"><?= $lang === 'ar' ? 'سوري' : 'Syrian' ?></option>
+                    <option value="Lebanese"><?= $lang === 'ar' ? 'لبناني' : 'Lebanese' ?></option>
+                    <option value="Palestinian"><?= $lang === 'ar' ? 'فلسطيني' : 'Palestinian' ?></option>
+                    <option value="Yemeni"><?= $lang === 'ar' ? 'يمني' : 'Yemeni' ?></option>
+                    <option value="Sudanese"><?= $lang === 'ar' ? 'سوداني' : 'Sudanese' ?></option>
+                    <option value="Moroccan"><?= $lang === 'ar' ? 'مغربي' : 'Moroccan' ?></option>
+                    <option value="Tunisian"><?= $lang === 'ar' ? 'تونسي' : 'Tunisian' ?></option>
+                    <option value="Algerian"><?= $lang === 'ar' ? 'جزائري' : 'Algerian' ?></option>
+                    <option value="Indian"><?= $lang === 'ar' ? 'هندي' : 'Indian' ?></option>
+                    <option value="Pakistani"><?= $lang === 'ar' ? 'باكستاني' : 'Pakistani' ?></option>
+                    <option value="Filipino"><?= $lang === 'ar' ? 'فلبيني' : 'Filipino' ?></option>
+                    <option value="Bangladeshi"><?= $lang === 'ar' ? 'بنجلاديشي' : 'Bangladeshi' ?></option>
+                    <option value="Other"><?= $lang === 'ar' ? 'أخرى' : 'Other' ?></option>
                 </select>
             </div>
 

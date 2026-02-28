@@ -251,7 +251,26 @@ include 'header.php';
                     <select name="nationality" style="width: 100%; padding: 8px;">
                         <option value="">الكل (All)</option>
                         <option value="Saudi" <?= ($_GET['nationality'] ?? '') === 'Saudi' ? 'selected' : '' ?>>سعودي</option>
-                        <option value="Non-Saudi" <?= ($_GET['nationality'] ?? '') === 'Non-Saudi' ? 'selected' : '' ?>>غير سعودي</option>
+                        <option value="UAE" <?= ($_GET['nationality'] ?? '') === 'UAE' ? 'selected' : '' ?>>إماراتي</option>
+                        <option value="Kuwaiti" <?= ($_GET['nationality'] ?? '') === 'Kuwaiti' ? 'selected' : '' ?>>كويتي</option>
+                        <option value="Qatari" <?= ($_GET['nationality'] ?? '') === 'Qatari' ? 'selected' : '' ?>>قطري</option>
+                        <option value="Bahraini" <?= ($_GET['nationality'] ?? '') === 'Bahraini' ? 'selected' : '' ?>>بحريني</option>
+                        <option value="Omani" <?= ($_GET['nationality'] ?? '') === 'Omani' ? 'selected' : '' ?>>عماني</option>
+                        <option value="Egyptian" <?= ($_GET['nationality'] ?? '') === 'Egyptian' ? 'selected' : '' ?>>مصري</option>
+                        <option value="Jordanian" <?= ($_GET['nationality'] ?? '') === 'Jordanian' ? 'selected' : '' ?>>أردني</option>
+                        <option value="Syrian" <?= ($_GET['nationality'] ?? '') === 'Syrian' ? 'selected' : '' ?>>سوري</option>
+                        <option value="Lebanese" <?= ($_GET['nationality'] ?? '') === 'Lebanese' ? 'selected' : '' ?>>لبناني</option>
+                        <option value="Palestinian" <?= ($_GET['nationality'] ?? '') === 'Palestinian' ? 'selected' : '' ?>>فلسطيني</option>
+                        <option value="Yemeni" <?= ($_GET['nationality'] ?? '') === 'Yemeni' ? 'selected' : '' ?>>يمني</option>
+                        <option value="Sudanese" <?= ($_GET['nationality'] ?? '') === 'Sudanese' ? 'selected' : '' ?>>سوداني</option>
+                        <option value="Moroccan" <?= ($_GET['nationality'] ?? '') === 'Moroccan' ? 'selected' : '' ?>>مغربي</option>
+                        <option value="Tunisian" <?= ($_GET['nationality'] ?? '') === 'Tunisian' ? 'selected' : '' ?>>تونسي</option>
+                        <option value="Algerian" <?= ($_GET['nationality'] ?? '') === 'Algerian' ? 'selected' : '' ?>>جزائري</option>
+                        <option value="Indian" <?= ($_GET['nationality'] ?? '') === 'Indian' ? 'selected' : '' ?>>هندي</option>
+                        <option value="Pakistani" <?= ($_GET['nationality'] ?? '') === 'Pakistani' ? 'selected' : '' ?>>باكستاني</option>
+                        <option value="Filipino" <?= ($_GET['nationality'] ?? '') === 'Filipino' ? 'selected' : '' ?>>فلبيني</option>
+                        <option value="Bangladeshi" <?= ($_GET['nationality'] ?? '') === 'Bangladeshi' ? 'selected' : '' ?>>بنجلاديشي</option>
+                        <option value="Other" <?= ($_GET['nationality'] ?? '') === 'Other' ? 'selected' : '' ?>>أخرى</option>
                     </select>
                 </div>
                 <div style="flex: 1; min-width: 150px;">
@@ -269,7 +288,7 @@ include 'header.php';
                     <label style="font-size: 13px;">سنوات الخبرة / Experience</label>
                     <select name="experience_years" style="width: 100%; padding: 8px;">
                         <option value="">الكل (All)</option>
-                        <option value="0" <?= iisset($_GET['experience_years']) && $_GET['experience_years'] === '0' ? 'selected' : '' ?>>بدون خبرة</option>
+                        <option value="0" <?= isset($_GET['experience_years']) && $_GET['experience_years'] === '0' ? 'selected' : '' ?>>بدون خبرة</option>
                         <option value="1" <?= ($_GET['experience_years'] ?? '') === '1' ? 'selected' : '' ?>>1 سنة</option>
                         <option value="2" <?= ($_GET['experience_years'] ?? '') === '2' ? 'selected' : '' ?>>2 سنوات</option>
                         <option value="3" <?= ($_GET['experience_years'] ?? '') === '3' ? 'selected' : '' ?>>3 سنوات</option>

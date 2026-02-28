@@ -11,6 +11,14 @@ if (!isset($_SESSION['admin'])) {
     HANDLE ADD JOB
 ======================= */
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
+    // Basic fallbacks for English if missing
+    $title_en = !empty($_POST['title_en']) ? $_POST['title_en'] : $_POST['title_ar'];
+    $description_en = !empty($_POST['description_en']) ? $_POST['description_en'] : $_POST['description_ar'];
+    
+    // Default publish date if empty
+    $publish_date = !empty($_POST['publish_date']) ? $_POST['publish_date'] : date('Y-m-d');
+    $end_date = !empty($_POST['end_date']) ? $_POST['end_date'] : null;
+
     $stmt = $conn->prepare("
         INSERT INTO jobs (
             title_en, title_ar, description_en, description_ar, location,
@@ -20,19 +28,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
 
-    // We keep English fields in DB but fill them with Arabic data if the admin only provides Arabic
     $stmt->bind_param(
         "ssssssisssssssssss",
-        $_POST['title_en'],
+        $title_en,
         $_POST['title_ar'],
-        $_POST['description_en'],
+        $description_en,
         $_POST['description_ar'],
         $_POST['location'],
         $_POST['job_type'],
         $_POST['vacancies'],
         $_POST['salary'],
-        $_POST['publish_date'],
-        $_POST['end_date'],
+        $publish_date,
+        $end_date,
         $_POST['requirements'],
         $_POST['tasks'],
         $_POST['skills'],

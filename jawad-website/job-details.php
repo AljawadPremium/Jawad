@@ -23,14 +23,23 @@ if ($result->num_rows === 0) {
 }
 
 $job = $result->fetch_assoc();
+
+// Language fallbacks for display
+$display_title = ($lang === 'ar') 
+    ? (!empty($job['title_ar']) ? $job['title_ar'] : $job['title_en'])
+    : (!empty($job['title_en']) ? $job['title_en'] : $job['title_ar']);
+
+$display_description = ($lang === 'ar')
+    ? (!empty($job['description_ar']) ? $job['description_ar'] : $job['description_en'])
+    : (!empty($job['description_en']) ? $job['description_en'] : $job['description_ar']);
 ?>
 
 <section style="margin-top:120px;" <?= $lang === 'ar' ? 'dir="rtl"' : '' ?>>
 
-    <h2><?= htmlspecialchars($lang === 'ar' ? $job['title_ar'] : $job['title_en']) ?></h2>
+    <h2><?= htmlspecialchars($display_title) ?></h2>
 
     <p>
-        <?= nl2br(htmlspecialchars($lang === 'ar' ? $job['description_ar'] : $job['description_en'])) ?>
+        <?= nl2br(htmlspecialchars($display_description)) ?>
     </p>
 
     <hr>

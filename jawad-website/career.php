@@ -15,13 +15,13 @@
     $stmt = $conn->prepare("
         SELECT *
         FROM jobs
-        WHERE (title_en LIKE ? OR description_en LIKE ?)
-          AND publish_date <= CURDATE()
+        WHERE (title_en LIKE ? OR description_en LIKE ? OR title_ar LIKE ? OR description_ar LIKE ?)
+          AND COALESCE(publish_date, created_at) <= CURDATE()
           AND (end_date IS NULL OR end_date >= CURDATE())
         ORDER BY created_at DESC
     ");
 
-    $stmt->bind_param("ss", $search, $search);
+    $stmt->bind_param("ssss", $search, $search, $search, $search);
     $stmt->execute();
     $result = $stmt->get_result();
 

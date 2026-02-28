@@ -334,7 +334,7 @@ include 'header.php';
                             <tr style="border-bottom: 1px solid #eee;">
                                 <td style="padding: 10px;"><?= htmlspecialchars($a['first_name'] . ' ' . $a['last_name']) ?></td>
                                 <td><?= htmlspecialchars($a['title_ar']) ?></td>
-                                <td><a href="<?= htmlspecialchars($a['cv_file']) ?>" target="_blank"
+                                <td><a href="/<?= htmlspecialchars($a['cv_file']) ?>" target="_blank"
                                         style="color: var(--gold);">تحميل CV</a></td>
                                 <td>
                                     <?php 

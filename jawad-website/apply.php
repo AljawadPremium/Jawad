@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param(
-                    "isssssssssssssssssissis",
+                    "isssssssssssssssississ",
                     $job_id,
                     $_POST['first_name'],
                     $_POST['father_name'],
@@ -198,7 +198,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h3><?= $lang === 'ar' ? 'المؤهلات والخبرة' : 'Qualifications & Experience' ?></h3>
             <div class="form-grid">
                 <select name="education_level" required>
-                    <option value="" disabled selected><?= $lang === 'ar' ? 'المستوى التعليمي' : 'Education Level' ?></option>
+                    <option value="" disabled selected><?= $lang === 'ar' ? 'المستوى التعليمي' : 'Education Level' ?>
+                    </option>
                     <option value="High School"><?= $lang === 'ar' ? 'ثانوي' : 'High School' ?></option>
                     <option value="Diploma"><?= $lang === 'ar' ? 'دبلوم' : 'Diploma' ?></option>
                     <option value="Bachelor"><?= $lang === 'ar' ? 'بكالوريوس' : 'Bachelor' ?></option>
@@ -215,7 +216,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <textarea class="full" name="experience_details"
                     placeholder="<?= $lang === 'ar' ? 'الخبرات السابقة' : 'Experience Details' ?>"></textarea>
                 <select name="experience_years" required>
-                    <option value="" disabled selected><?= $lang === 'ar' ? 'سنوات الخبرة' : 'Years of Experience' ?></option>
+                    <option value="" disabled selected><?= $lang === 'ar' ? 'سنوات الخبرة' : 'Years of Experience' ?>
+                    </option>
                     <option value="0"><?= $lang === 'ar' ? 'بدون خبرة' : 'No Experience' ?></option>
                     <option value="1"><?= $lang === 'ar' ? 'سنة واحدة' : '1 Year' ?></option>
                     <option value="2"><?= $lang === 'ar' ? 'سنتين' : '2 Years' ?></option>

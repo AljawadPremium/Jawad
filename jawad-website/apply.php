@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param(
-                    "isssssssssssssssississ",
+                    "issssssssssssssssississ",
                     $job_id,
                     $_POST['first_name'],
                     $_POST['father_name'],

@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
 
     // Date validation
     if ($end_date && $end_date < $publish_date) {
-        $error_msg = "خطأ: تاريخ الانتهاء لا يمكن أن يكون قبل تاريخ النشر.";
+        $_SESSION['error_msg'] = "خطأ: تاريخ الانتهاء لا يمكن أن يكون قبل تاريخ النشر.";
     } else {
         $stmt = $conn->prepare("
             INSERT INTO jobs (
@@ -59,13 +59,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
         );
 
         if ($stmt->execute()) {
-            $success_msg = "تمت إضافة الوظيفة بنجاح.";
+            $_SESSION['success_msg'] = "تمت إضافة الوظيفة بنجاح.";
         } else {
-            $error_msg = "خطأ في إضافة الوظيفة: " . $conn->error;
+            $_SESSION['error_msg'] = "خطأ في إضافة الوظيفة: " . $conn->error;
         }
         $stmt->close();
     }
+    header("Location: career-admin.php");
+    exit;
 }
+
+// Fetch flash messages and then clear them
+$error_msg = $_SESSION['error_msg'] ?? null;
+$success_msg = $_SESSION['success_msg'] ?? null;
+
+// Handle legacy 'updated' parameter from career-edit.php if any
+if (isset($_GET['updated'])) {
+    $success_msg = "تم تحديث الوظيفة بنجاح.";
+}
+
+unset($_SESSION['error_msg'], $_SESSION['success_msg']);
 
 /* =======================
     FETCH DATA
@@ -131,15 +144,21 @@ include 'header.php';
 
     <h2 style="color: var(--gold); margin-bottom: 30px;">لوحة تحكم التوظيف</h2>
 
-    <?php if (isset($error_msg)): ?>
-        <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-            <?= $error_msg ?>
+    <?php if ($error_msg): ?>
+        <div class="alert alert-error"
+            style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><?= $error_msg ?></span>
+            <span onclick="this.parentElement.style.display='none'"
+                style="cursor: pointer; font-weight: bold; font-size: 20px;">&times;</span>
         </div>
     <?php endif; ?>
 
-    <?php if (isset($success_msg)): ?>
-        <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-            <?= $success_msg ?>
+    <?php if ($success_msg): ?>
+        <div class="alert alert-success"
+            style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><?= $success_msg ?></span>
+            <span onclick="this.parentElement.style.display='none'"
+                style="cursor: pointer; font-weight: bold; font-size: 20px;">&times;</span>
         </div>
     <?php endif; ?>
 
@@ -411,13 +430,13 @@ include 'header.php';
 </section>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", fu nction() {
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('tab') === 'applicants') {
-            showTab(1);
-        } else {
-            showTab(0);
-        }
+        if(urlParams.get('tab') === 'applicants') {
+        showTab(1);
+    } else {
+        showTab(0);
+    }
     });
 
     function showTab(index) {

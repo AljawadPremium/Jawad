@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_job'])) {
     $description_en = !empty($_POST['description_en']) ? $_POST['description_en'] : $_POST['description_ar'];
     $requirements_en = !empty($_POST['requirements_en']) ? $_POST['requirements_en'] : $_POST['requirements'];
     $location_en = !empty($_POST['location_en']) ? $_POST['location_en'] : $_POST['location'];
-    
+
     // Default publish date if empty
     $publish_date = !empty($_POST['publish_date']) ? $_POST['publish_date'] : date('Y-m-d');
     $end_date = !empty($_POST['end_date']) ? $_POST['end_date'] : null;
@@ -144,8 +144,10 @@ include 'header.php';
     <?php endif; ?>
 
     <div class="admin-tabs" style="margin-bottom: 20px; display: flex; gap: 10px;">
-        <button class="tab <?= ($_GET['tab'] ?? '') !== 'applicants' ? 'active' : '' ?>" onclick="showTab(0)">➕ إضافة وظيفة</button>
-        <button class="tab <?= ($_GET['tab'] ?? '') === 'applicants' ? 'active' : '' ?>" onclick="showTab(1)">📄 المتقدمين</button>
+        <button class="tab <?= ($_GET['tab'] ?? '') !== 'applicants' ? 'active' : '' ?>" onclick="showTab(0)">➕ إضافة
+            وظيفة</button>
+        <button class="tab <?= ($_GET['tab'] ?? '') === 'applicants' ? 'active' : '' ?>" onclick="showTab(1)">📄
+            المتقدمين</button>
     </div>
 
     <div id="tab-jobs">
@@ -243,34 +245,54 @@ include 'header.php';
     <div id="tab-applicants" style="display:none;">
         <div class="admin-card">
             <h3>تصفية المتقدمين (Filters)</h3>
-            <form method="GET" style="display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-end; flex-wrap: wrap;">
+            <form method="GET"
+                style="display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-end; flex-wrap: wrap;">
                 <input type="hidden" name="tab" value="applicants">
-                
+
                 <div style="flex: 1; min-width: 150px;">
                     <label style="font-size: 13px;">الجنسية / Nationality</label>
                     <select name="nationality" style="width: 100%; padding: 8px;">
                         <option value="">الكل (All)</option>
-                        <option value="Saudi" <?= ($_GET['nationality'] ?? '') === 'Saudi' ? 'selected' : '' ?>>سعودي</option>
-                        <option value="UAE" <?= ($_GET['nationality'] ?? '') === 'UAE' ? 'selected' : '' ?>>إماراتي</option>
-                        <option value="Kuwaiti" <?= ($_GET['nationality'] ?? '') === 'Kuwaiti' ? 'selected' : '' ?>>كويتي</option>
-                        <option value="Qatari" <?= ($_GET['nationality'] ?? '') === 'Qatari' ? 'selected' : '' ?>>قطري</option>
-                        <option value="Bahraini" <?= ($_GET['nationality'] ?? '') === 'Bahraini' ? 'selected' : '' ?>>بحريني</option>
-                        <option value="Omani" <?= ($_GET['nationality'] ?? '') === 'Omani' ? 'selected' : '' ?>>عماني</option>
-                        <option value="Egyptian" <?= ($_GET['nationality'] ?? '') === 'Egyptian' ? 'selected' : '' ?>>مصري</option>
-                        <option value="Jordanian" <?= ($_GET['nationality'] ?? '') === 'Jordanian' ? 'selected' : '' ?>>أردني</option>
-                        <option value="Syrian" <?= ($_GET['nationality'] ?? '') === 'Syrian' ? 'selected' : '' ?>>سوري</option>
-                        <option value="Lebanese" <?= ($_GET['nationality'] ?? '') === 'Lebanese' ? 'selected' : '' ?>>لبناني</option>
+                        <option value="Saudi" <?= ($_GET['nationality'] ?? '') === 'Saudi' ? 'selected' : '' ?>>سعودي
+                        </option>
+                        <option value="UAE" <?= ($_GET['nationality'] ?? '') === 'UAE' ? 'selected' : '' ?>>إماراتي
+                        </option>
+                        <option value="Kuwaiti" <?= ($_GET['nationality'] ?? '') === 'Kuwaiti' ? 'selected' : '' ?>>كويتي
+                        </option>
+                        <option value="Qatari" <?= ($_GET['nationality'] ?? '') === 'Qatari' ? 'selected' : '' ?>>قطري
+                        </option>
+                        <option value="Bahraini" <?= ($_GET['nationality'] ?? '') === 'Bahraini' ? 'selected' : '' ?>>
+                            بحريني</option>
+                        <option value="Omani" <?= ($_GET['nationality'] ?? '') === 'Omani' ? 'selected' : '' ?>>عماني
+                        </option>
+                        <option value="Egyptian" <?= ($_GET['nationality'] ?? '') === 'Egyptian' ? 'selected' : '' ?>>مصري
+                        </option>
+                        <option value="Jordanian" <?= ($_GET['nationality'] ?? '') === 'Jordanian' ? 'selected' : '' ?>>
+                            أردني</option>
+                        <option value="Syrian" <?= ($_GET['nationality'] ?? '') === 'Syrian' ? 'selected' : '' ?>>سوري
+                        </option>
+                        <option value="Lebanese" <?= ($_GET['nationality'] ?? '') === 'Lebanese' ? 'selected' : '' ?>>
+                            لبناني</option>
                         <option value="Palestinian" <?= ($_GET['nationality'] ?? '') === 'Palestinian' ? 'selected' : '' ?>>فلسطيني</option>
-                        <option value="Yemeni" <?= ($_GET['nationality'] ?? '') === 'Yemeni' ? 'selected' : '' ?>>يمني</option>
-                        <option value="Sudanese" <?= ($_GET['nationality'] ?? '') === 'Sudanese' ? 'selected' : '' ?>>سوداني</option>
-                        <option value="Moroccan" <?= ($_GET['nationality'] ?? '') === 'Moroccan' ? 'selected' : '' ?>>مغربي</option>
-                        <option value="Tunisian" <?= ($_GET['nationality'] ?? '') === 'Tunisian' ? 'selected' : '' ?>>تونسي</option>
-                        <option value="Algerian" <?= ($_GET['nationality'] ?? '') === 'Algerian' ? 'selected' : '' ?>>جزائري</option>
-                        <option value="Indian" <?= ($_GET['nationality'] ?? '') === 'Indian' ? 'selected' : '' ?>>هندي</option>
-                        <option value="Pakistani" <?= ($_GET['nationality'] ?? '') === 'Pakistani' ? 'selected' : '' ?>>باكستاني</option>
-                        <option value="Filipino" <?= ($_GET['nationality'] ?? '') === 'Filipino' ? 'selected' : '' ?>>فلبيني</option>
+                        <option value="Yemeni" <?= ($_GET['nationality'] ?? '') === 'Yemeni' ? 'selected' : '' ?>>يمني
+                        </option>
+                        <option value="Sudanese" <?= ($_GET['nationality'] ?? '') === 'Sudanese' ? 'selected' : '' ?>>
+                            سوداني</option>
+                        <option value="Moroccan" <?= ($_GET['nationality'] ?? '') === 'Moroccan' ? 'selected' : '' ?>>مغربي
+                        </option>
+                        <option value="Tunisian" <?= ($_GET['nationality'] ?? '') === 'Tunisian' ? 'selected' : '' ?>>تونسي
+                        </option>
+                        <option value="Algerian" <?= ($_GET['nationality'] ?? '') === 'Algerian' ? 'selected' : '' ?>>
+                            جزائري</option>
+                        <option value="Indian" <?= ($_GET['nationality'] ?? '') === 'Indian' ? 'selected' : '' ?>>هندي
+                        </option>
+                        <option value="Pakistani" <?= ($_GET['nationality'] ?? '') === 'Pakistani' ? 'selected' : '' ?>>
+                            باكستاني</option>
+                        <option value="Filipino" <?= ($_GET['nationality'] ?? '') === 'Filipino' ? 'selected' : '' ?>>
+                            فلبيني</option>
                         <option value="Bangladeshi" <?= ($_GET['nationality'] ?? '') === 'Bangladeshi' ? 'selected' : '' ?>>بنجلاديشي</option>
-                        <option value="Other" <?= ($_GET['nationality'] ?? '') === 'Other' ? 'selected' : '' ?>>أخرى</option>
+                        <option value="Other" <?= ($_GET['nationality'] ?? '') === 'Other' ? 'selected' : '' ?>>أخرى
+                        </option>
                     </select>
                 </div>
                 <div style="flex: 1; min-width: 150px;">
@@ -278,10 +300,14 @@ include 'header.php';
                     <select name="education_level" style="width: 100%; padding: 8px;">
                         <option value="">الكل (All)</option>
                         <option value="High School" <?= ($_GET['education_level'] ?? '') === 'High School' ? 'selected' : '' ?>>ثانوي</option>
-                        <option value="Diploma" <?= ($_GET['education_level'] ?? '') === 'Diploma' ? 'selected' : '' ?>>دبلوم</option>
-                        <option value="Bachelor" <?= ($_GET['education_level'] ?? '') === 'Bachelor' ? 'selected' : '' ?>>بكالوريوس</option>
-                        <option value="Master" <?= ($_GET['education_level'] ?? '') === 'Master' ? 'selected' : '' ?>>ماجستير</option>
-                        <option value="PhD" <?= ($_GET['education_level'] ?? '') === 'PhD' ? 'selected' : '' ?>>دكتوراه</option>
+                        <option value="Diploma" <?= ($_GET['education_level'] ?? '') === 'Diploma' ? 'selected' : '' ?>>
+                            دبلوم</option>
+                        <option value="Bachelor" <?= ($_GET['education_level'] ?? '') === 'Bachelor' ? 'selected' : '' ?>>
+                            بكالوريوس</option>
+                        <option value="Master" <?= ($_GET['education_level'] ?? '') === 'Master' ? 'selected' : '' ?>>
+                            ماجستير</option>
+                        <option value="PhD" <?= ($_GET['education_level'] ?? '') === 'PhD' ? 'selected' : '' ?>>دكتوراه
+                        </option>
                     </select>
                 </div>
                 <div style="flex: 1; min-width: 150px;">
@@ -290,26 +316,47 @@ include 'header.php';
                         <option value="">الكل (All)</option>
                         <option value="0" <?= isset($_GET['experience_years']) && $_GET['experience_years'] === '0' ? 'selected' : '' ?>>بدون خبرة</option>
                         <option value="1" <?= ($_GET['experience_years'] ?? '') === '1' ? 'selected' : '' ?>>1 سنة</option>
-                        <option value="2" <?= ($_GET['experience_years'] ?? '') === '2' ? 'selected' : '' ?>>2 سنوات</option>
-                        <option value="3" <?= ($_GET['experience_years'] ?? '') === '3' ? 'selected' : '' ?>>3 سنوات</option>
-                        <option value="4" <?= ($_GET['experience_years'] ?? '') === '4' ? 'selected' : '' ?>>4 سنوات</option>
-                        <option value="5" <?= ($_GET['experience_years'] ?? '') === '5' ? 'selected' : '' ?>>5+ سنوات</option>
+                        <option value="2" <?= ($_GET['experience_years'] ?? '') === '2' ? 'selected' : '' ?>>2 سنوات
+                        </option>
+                        <option value="3" <?= ($_GET['experience_years'] ?? '') === '3' ? 'selected' : '' ?>>3 سنوات
+                        </option>
+                        <option value="4" <?= ($_GET['experience_years'] ?? '') === '4' ? 'selected' : '' ?>>4 سنوات
+                        </option>
+                        <option value="5" <?= ($_GET['experience_years'] ?? '') === '5' ? 'selected' : '' ?>>5+ سنوات
+                        </option>
                     </select>
                 </div>
                 <div style="flex: 1; min-width: 150px;">
                     <label style="font-size: 13px;">الحالة / Status</label>
                     <select name="status" style="width: 100%; padding: 8px;">
                         <option value="">الكل (All)</option>
-                        <option value="pending" <?= ($_GET['status'] ?? '') === 'pending' ? 'selected' : '' ?>>قيد الانتظار</option>
-                        <option value="review" <?= ($_GET['status'] ?? '') === 'review' ? 'selected' : '' ?>>مراجعة</option>
-                        <option value="interview" <?= ($_GET['status'] ?? '') === 'interview' ? 'selected' : '' ?>>مقابلة</option>
-                        <option value="accepted" <?= ($_GET['status'] ?? '') === 'accepted' ? 'selected' : '' ?>>مقبول</option>
-                        <option value="rejected" <?= ($_GET['status'] ?? '') === 'rejected' ? 'selected' : '' ?>>مرفوض</option>
+                        <option value="pending" <?= ($_GET['status'] ?? '') === 'pending' ? 'selected' : '' ?>>قيد الانتظار
+                        </option>
+                        <option value="review" <?= ($_GET['status'] ?? '') === 'review' ? 'selected' : '' ?>>مراجعة
+                        </option>
+                        <option value="interview" <?= ($_GET['status'] ?? '') === 'interview' ? 'selected' : '' ?>>مقابلة
+                        </option>
+                        <option value="accepted" <?= ($_GET['status'] ?? '') === 'accepted' ? 'selected' : '' ?>>مقبول
+                        </option>
+                        <option value="rejected" <?= ($_GET['status'] ?? '') === 'rejected' ? 'selected' : '' ?>>مرفوض
+                        </option>
                     </select>
                 </div>
                 <div>
-                    <button type="submit" style="padding: 8px 20px; background: var(--gold); color: white; border: none; cursor: pointer; border-radius: 4px;">تصفية</button>
-                    <a href="career-admin.php?tab=applicants" style="padding: 9px 20px; background: #eee; color: #333; text-decoration: none; border-radius: 4px; margin-right:5px;">إلغاء</a>
+                    <button type="submit"
+                        style="padding: 8px 20px; background: var(--gold); color: white; border: none; cursor: pointer; border-radius: 4px;">تصفية</button>
+                    <a href="career-admin.php?tab=applicants"
+                        style="padding: 9px 20px; background: #eee; color: #333; text-decoration: none; border-radius: 4px; margin-right:5px;">إلغاء</a>
+
+                    <?php
+                    // Generate the export link with current filters
+                    $export_params = $_GET;
+                    $export_params['export'] = 'excel'; // optional flag
+                    $export_link = "applicant-export.php?" . http_build_query($export_params);
+                    ?>
+                    <a href="<?= $export_link ?>"
+                        style="padding: 9px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 4px; margin-right:5px;">📊
+                        تصدير Excel</a>
                 </div>
             </form>
         </div>
@@ -332,23 +379,25 @@ include 'header.php';
                     <tbody>
                         <?php while ($a = $applicants->fetch_assoc()): ?>
                             <tr style="border-bottom: 1px solid #eee;">
-                                <td style="padding: 10px;"><?= htmlspecialchars($a['first_name'] . ' ' . $a['last_name']) ?></td>
+                                <td style="padding: 10px;"><?= htmlspecialchars($a['first_name'] . ' ' . $a['last_name']) ?>
+                                </td>
                                 <td><?= htmlspecialchars($a['title_ar']) ?></td>
                                 <td><a href="<?= htmlspecialchars($a['cv_file']) ?>" target="_blank"
                                         style="color: var(--gold);">تحميل CV</a></td>
                                 <td>
-                                    <?php 
-                                        $status_map = [
-                                            'pending' => 'قيد الانتظار',
-                                            'review' => 'مراجعة',
-                                            'interview' => 'مقابلة',
-                                            'accepted' => 'مقبول',
-                                            'rejected' => 'مرفوض'
-                                        ];
-                                        $display_status = $status_map[$a['status']] ?? $a['status'];
-                                        $status_class = 'status-' . strtolower($a['status']);
+                                    <?php
+                                    $status_map = [
+                                        'pending' => 'قيد الانتظار',
+                                        'review' => 'مراجعة',
+                                        'interview' => 'مقابلة',
+                                        'accepted' => 'مقبول',
+                                        'rejected' => 'مرفوض'
+                                    ];
+                                    $display_status = $status_map[$a['status']] ?? $a['status'];
+                                    $status_class = 'status-' . strtolower($a['status']);
                                     ?>
-                                    <span class="status-badge <?= $status_class ?>"><?= htmlspecialchars($display_status) ?></span>
+                                    <span
+                                        class="status-badge <?= $status_class ?>"><?= htmlspecialchars($display_status) ?></span>
                                 </td>
                                 <td><a href="applicant-view.php?id=<?= $a['id'] ?>" class="view-btn">عرض التفاصيل</a></td>
                             </tr>
@@ -362,9 +411,9 @@ include 'header.php';
 </section>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
-        if(urlParams.get('tab') === 'applicants') {
+        if (urlParams.get('tab') === 'applicants') {
             showTab(1);
         } else {
             showTab(0);
@@ -438,11 +487,31 @@ include 'header.php';
         display: inline-block;
         white-space: nowrap;
     }
-    .status-pending { background: #fdf0d5; color: #b58a3c; } 
-    .status-review { background: #e0f0ff; color: #0056b3; } 
-    .status-interview { background: #f0e6ff; color: #6f42c1; } 
-    .status-accepted { background: #d4edda; color: #155724; } 
-    .status-rejected { background: #f8d7da; color: #721c24; }
+
+    .status-pending {
+        background: #fdf0d5;
+        color: #b58a3c;
+    }
+
+    .status-review {
+        background: #e0f0ff;
+        color: #0056b3;
+    }
+
+    .status-interview {
+        background: #f0e6ff;
+        color: #6f42c1;
+    }
+
+    .status-accepted {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status-rejected {
+        background: #f8d7da;
+        color: #721c24;
+    }
 </style>
 
 <?php include 'footer.php'; ?>

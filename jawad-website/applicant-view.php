@@ -9,7 +9,8 @@ if (!isset($_SESSION['admin'])) {
 
 $id = $_GET['id'] ?? null;
 if (!$id || !is_numeric($id)) {
-    echo "طلب غير صالح"; exit;
+    echo "طلب غير صالح";
+    exit;
 }
 
 /* HANDLE STATUS UPDATE */
@@ -33,7 +34,8 @@ $stmt->execute();
 $app = $stmt->get_result()->fetch_assoc();
 
 if (!$app) {
-    echo "المتقدم غير موجود"; exit;
+    echo "المتقدم غير موجود";
+    exit;
 }
 
 include 'header.php';
@@ -44,22 +46,27 @@ include 'header.php';
     <h2 style="color: var(--gold);">تفاصيل المتقدم</h2>
 
     <div class="admin-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; background: #fdfbf7; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; background: #fdfbf7; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
             <div>
-                <h3 style="margin: 0;"><?= htmlspecialchars($app['first_name'].' '.$app['last_name']) ?></h3>
-                <p style="margin: 5px 0; color: #666;">متقدم لوظيفة: <strong><?= htmlspecialchars($app['title_ar']) ?></strong></p>
+                <h3 style="margin: 0;"><?= htmlspecialchars($app['first_name'] . ' ' . $app['last_name']) ?></h3>
+                <p style="margin: 5px 0; color: #666;">متقدم لوظيفة:
+                    <strong><?= htmlspecialchars($app['title_ar']) ?></strong></p>
             </div>
-            
-            <form method="POST" style="background: white; padding: 15px; border: 1px solid var(--gold); border-radius: 8px;">
+
+            <form method="POST"
+                style="background: white; padding: 15px; border: 1px solid var(--gold); border-radius: 8px;">
                 <label style="font-size: 14px;">تحديث الحالة:</label>
-                <select name="status" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;">
-                    <option value="قيد الانتظار" <?= $app['status'] == 'قيد الانتظار' ? 'selected' : '' ?>>قيد الانتظار</option>
-                    <option value="مراجعة" <?= $app['status'] == 'مراجعة' ? 'selected' : '' ?>>مراجعة</option>
-                    <option value="مقابلة" <?= $app['status'] == 'مقابلة' ? 'selected' : '' ?>>مقابلة</option>
-                    <option value="قبول" <?= $app['status'] == 'قبول' ? 'selected' : '' ?>>قبول</option>
-                    <option value="رفض" <?= $app['status'] == 'رفض' ? 'selected' : '' ?>>رفض</option>
+                <select name="status"
+                    style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;">
+                    <option value="pending" <?= $app['status'] == 'pending' ? 'selected' : '' ?>>قيد الانتظار</option>
+                    <option value="review" <?= $app['status'] == 'review' ? 'selected' : '' ?>>مراجعة</option>
+                    <option value="interview" <?= $app['status'] == 'interview' ? 'selected' : '' ?>>مقابلة</option>
+                    <option value="accepted" <?= $app['status'] == 'accepted' ? 'selected' : '' ?>>مقبول</option>
+                    <option value="rejected" <?= $app['status'] == 'rejected' ? 'selected' : '' ?>>مرفوض</option>
                 </select>
-                <button type="submit" name="update_status" style="background: var(--gold); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">تحديث</button>
+                <button type="submit" name="update_status"
+                    style="background: var(--gold); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">تحديث</button>
             </form>
         </div>
 
@@ -80,10 +87,12 @@ include 'header.php';
         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
         <div style="display: flex; gap: 20px;">
-            <a href="<?= htmlspecialchars($app['cv_file']) ?>" target="_blank" style="background: var(--dark); color: white; padding: 12px 25px; text-decoration: none; border-radius: 8px; font-weight: bold;">
+            <a href="<?= htmlspecialchars($app['cv_file']) ?>" target="_blank"
+                style="background: var(--dark); color: white; padding: 12px 25px; text-decoration: none; border-radius: 8px; font-weight: bold;">
                 📥 تحميل السيرة الذاتية (CV)
             </a>
-            <a href="career-admin.php" style="padding: 12px 25px; text-decoration: none; color: #666;">← العودة للقائمة</a>
+            <a href="career-admin.php" style="padding: 12px 25px; text-decoration: none; color: #666;">← العودة
+                للقائمة</a>
         </div>
     </div>
 

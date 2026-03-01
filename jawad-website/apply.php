@@ -41,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'email',
         'city',
         'education_level',
-        'qualification',
         'major',
         'experience_years'
     ];
@@ -80,13 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         job_id, first_name, father_name, grandfather_name, last_name,
                         birth_date, birth_place, gender, nationality,
                         city, phone, emergency_phone, email, address,
-                        education_level, qualification, major, graduation_year,
+                        education_level, major, graduation_year,
                         courses, experience_details, experience_years, cv_file, status
-                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param(
-                    "issssssssssssssssississ",
+                    "isssssssssssssssississ",
                     $job_id,
                     $_POST['first_name'],
                     $_POST['father_name'],
@@ -102,7 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_POST['email'],
                     $_POST['address'],
                     $_POST['education_level'],
-                    $_POST['qualification'],
                     $_POST['major'],
                     $graduation_year,
                     $_POST['courses'],
@@ -206,8 +204,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="Master"><?= $lang === 'ar' ? 'ماجستير' : 'Master' ?></option>
                     <option value="PhD"><?= $lang === 'ar' ? 'دكتوراه' : 'PhD' ?></option>
                 </select>
-                <input type="text" name="qualification" placeholder="<?= $lang === 'ar' ? 'المؤهل' : 'Qualification' ?>"
-                    required>
                 <input type="text" name="major" placeholder="<?= $lang === 'ar' ? 'التخصص' : 'Major' ?>" required>
                 <input type="number" name="graduation_year"
                     placeholder="<?= $lang === 'ar' ? 'سنة التخرج' : 'Graduation Year' ?>">

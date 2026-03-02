@@ -249,8 +249,18 @@ include 'header.php';
             <?php else: ?>
                 <?php while ($job = $jobs_list->fetch_assoc()): ?>
                     <div class="job-row"
-                        style="display:flex; justify-content:space-between; padding:15px; border-bottom:1px solid #eee;">
-                        <span><?= htmlspecialchars($job['title_ar']) ?></span>
+                        style="display:flex; justify-content:space-between; align-items: center; padding:15px; border-bottom:1px solid #eee;">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <span><?= htmlspecialchars($job['title_ar']) ?></span>
+                            <?php
+                            $job_url = "https://home.aljawad.sa/job-details.php?id=" . $job['id'];
+                            $qr_url = "https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=" . urlencode($job_url);
+                            ?>
+                            <a href="<?= $qr_url ?>" target="_blank" title="اضغط لتكبير الـ QR Code">
+                                <img src="<?= $qr_url ?>" alt="QR Code"
+                                    style="width: 50px; height: 50px; border: 1px solid #ddd; padding: 2px; border-radius: 4px;">
+                            </a>
+                        </div>
                         <div class="actions">
                             <a href="career-edit.php?id=<?= $job['id'] ?>" style="color: blue;">تعديل</a> |
                             <a href="career-delete.php?id=<?= $job['id'] ?>" style="color:red;"

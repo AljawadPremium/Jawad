@@ -51,7 +51,8 @@ include 'header.php';
             <div>
                 <h3 style="margin: 0;"><?= htmlspecialchars($app['first_name'] . ' ' . $app['last_name']) ?></h3>
                 <p style="margin: 5px 0; color: #666;">متقدم لوظيفة:
-                    <strong><?= htmlspecialchars($app['title_ar']) ?></strong></p>
+                    <strong><?= htmlspecialchars($app['title_ar']) ?></strong>
+                </p>
             </div>
 
             <form method="POST"
@@ -71,6 +72,45 @@ include 'header.php';
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+            <p><strong>الجنسية:</strong>
+                <?php
+                $nat_map = [
+                    'Saudi' => 'سعودي',
+                    'UAE' => 'إماراتي',
+                    'Kuwaiti' => 'كويتي',
+                    'Qatari' => 'قطري',
+                    'Bahraini' => 'بحريني',
+                    'Omani' => 'عماني',
+                    'Egyptian' => 'مصري',
+                    'Jordanian' => 'أردني',
+                    'Syrian' => 'سوري',
+                    'Lebanese' => 'لبناني',
+                    'Palestinian' => 'فلسطيني',
+                    'Yemeni' => 'يمني',
+                    'Sudanese' => 'سوداني',
+                    'Moroccan' => 'مغربي',
+                    'Tunisian' => 'تونسي',
+                    'Algerian' => 'جزائري',
+                    'Indian' => 'هندي',
+                    'Pakistani' => 'باكستاني',
+                    'Filipino' => 'فلبيني',
+                    'Bangladeshi' => 'بنجلاديشي',
+                    'Other' => 'أخرى'
+                ];
+                echo htmlspecialchars($nat_map[$app['nationality']] ?? $app['nationality']);
+                ?>
+            </p>
+            <p><strong>العمر:</strong>
+                <?php
+                if (!empty($app['birth_date'])) {
+                    $birthDate = new DateTime($app['birth_date']);
+                    $today = new DateTime('today');
+                    echo $birthDate->diff($today)->y . ' (' . htmlspecialchars($app['birth_date']) . ')';
+                } else {
+                    echo 'N/A';
+                }
+                ?>
+            </p>
             <p><strong>البريد الإلكتروني:</strong> <?= htmlspecialchars($app['email']) ?></p>
             <p><strong>رقم الجوال:</strong> <?= htmlspecialchars($app['phone']) ?></p>
             <p><strong>المدينة:</strong> <?= htmlspecialchars($app['city']) ?></p>

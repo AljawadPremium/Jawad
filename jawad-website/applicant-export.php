@@ -90,6 +90,8 @@ echo "<th>First Name / الاسم</th>";
 echo "<th>Last Name / العائلة</th>";
 echo "<th>Email / البريد</th>";
 echo "<th>Phone / الجوال</th>";
+echo "<th>Nationality / الجنسية</th>";
+echo "<th>Age / العمر</th>";
 echo "<th>Job Title / الوظيفة</th>";
 echo "<th>City / المدينة</th>";
 echo "<th>Education / التعليم</th>";
@@ -105,12 +107,48 @@ while ($a = $applicants->fetch_assoc()) {
     $display_status = $status_map[$a['status']] ?? $a['status'];
     $cv_full_link = "https://" . $_SERVER['HTTP_HOST'] . "/" . $a['cv_file'];
 
+    // Nationality Map
+    $nat_map = [
+        'Saudi' => 'سعودي',
+        'UAE' => 'إماراتي',
+        'Kuwaiti' => 'كويتي',
+        'Qatari' => 'قطري',
+        'Bahraini' => 'بحريني',
+        'Omani' => 'عماني',
+        'Egyptian' => 'مصري',
+        'Jordanian' => 'أردني',
+        'Syrian' => 'سوري',
+        'Lebanese' => 'لبناني',
+        'Palestinian' => 'فلسطيني',
+        'Yemeni' => 'يمني',
+        'Sudanese' => 'سوداني',
+        'Moroccan' => 'مغربي',
+        'Tunisian' => 'تونسي',
+        'Algerian' => 'جزائري',
+        'Indian' => 'هندي',
+        'Pakistani' => 'باكستاني',
+        'Filipino' => 'فلبيني',
+        'Bangladeshi' => 'بنجلاديشي',
+        'Other' => 'أخرى'
+    ];
+    $nationality_ar = $nat_map[$a['nationality']] ?? $a['nationality'];
+
+    // Age Calculation
+    $age = 'N/A';
+    if (!empty($a['birth_date'])) {
+        $birthDate = new DateTime($a['birth_date']);
+        $today = new DateTime('today');
+        $age = $birthDate->diff($today)->y;
+    }
+
     echo "<tr>";
     echo "<td>" . $a['id'] . "</td>";
     echo "<td>" . htmlspecialchars($a['first_name']) . "</td>";
     echo "<td>" . htmlspecialchars($a['last_name']) . "</td>";
     echo "<td>" . htmlspecialchars($a['email']) . "</td>";
     echo "<td>" . htmlspecialchars($a['phone']) . "</td>";
+    echo "<td>" . htmlspecialchars($nationality_ar) . "</td>";
+    echo "<td>" . htmlspecialchars($age) . "</td>";
     echo "<td>" . htmlspecialchars($a['title_ar']) . "</td>";
     echo "<td>" . htmlspecialchars($a['city']) . "</td>";
     echo "<td>" . htmlspecialchars($a['education_level']) . "</td>";

@@ -118,6 +118,7 @@ if (count($where_clauses) > 0) {
 $sql = "
     SELECT 
         a.id, a.first_name, a.last_name, a.email, a.phone, a.cv_file, a.status,
+        a.nationality, a.birth_date,
         j.title_ar
     FROM job_applications a
     JOIN jobs j ON a.job_id = j.id
@@ -389,6 +390,8 @@ include 'header.php';
                     <thead>
                         <tr style="background:#f4f4f4; text-align:right;">
                             <th style="padding: 10px;">الاسم</th>
+                            <th>الجنسية</th>
+                            <th>العمر</th>
                             <th>الوظيفة</th>
                             <th>السيرة الذاتية</th>
                             <th>الحالة</th>
@@ -399,6 +402,45 @@ include 'header.php';
                         <?php while ($a = $applicants->fetch_assoc()): ?>
                             <tr style="border-bottom: 1px solid #eee;">
                                 <td style="padding: 10px;"><?= htmlspecialchars($a['first_name'] . ' ' . $a['last_name']) ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    $nat_map = [
+                                        'Saudi' => 'سعودي',
+                                        'UAE' => 'إماراتي',
+                                        'Kuwaiti' => 'كويتي',
+                                        'Qatari' => 'قطري',
+                                        'Bahraini' => 'بحريني',
+                                        'Omani' => 'عماني',
+                                        'Egyptian' => 'مصري',
+                                        'Jordanian' => 'أردني',
+                                        'Syrian' => 'سوري',
+                                        'Lebanese' => 'لبناني',
+                                        'Palestinian' => 'فلسطيني',
+                                        'Yemeni' => 'يمني',
+                                        'Sudanese' => 'سوداني',
+                                        'Moroccan' => 'مغربي',
+                                        'Tunisian' => 'تونسي',
+                                        'Algerian' => 'جزائري',
+                                        'Indian' => 'هندي',
+                                        'Pakistani' => 'باكستاني',
+                                        'Filipino' => 'فلبيني',
+                                        'Bangladeshi' => 'بنجلاديشي',
+                                        'Other' => 'أخرى'
+                                    ];
+                                    echo htmlspecialchars($nat_map[$a['nationality']] ?? $a['nationality']);
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if (!empty($a['birth_date'])) {
+                                        $birthDate = new DateTime($a['birth_date']);
+                                        $today = new DateTime('today');
+                                        echo $birthDate->diff($today)->y;
+                                    } else {
+                                        echo 'N/A';
+                                    }
+                                    ?>
                                 </td>
                                 <td><?= htmlspecialchars($a['title_ar']) ?></td>
                                 <td><a href="<?= htmlspecialchars($a['cv_file']) ?>" target="_blank"

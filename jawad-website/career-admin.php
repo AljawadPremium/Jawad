@@ -430,13 +430,13 @@ include 'header.php';
 </section>
 
 <script>
-    document.addEventListener("DOMContentLoaded", fu nction() {
+    document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
-        if(urlParams.get('tab') === 'applicants') {
-        showTab(1);
-    } else {
-        showTab(0);
-    }
+        if (urlParams.get('tab') === 'applicants') {
+            showTab(1);
+        } else {
+            showTab(0);
+        }
     });
 
     function showTab(index) {

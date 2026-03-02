@@ -114,6 +114,9 @@ include 'header.php';
             <p><strong>البريد الإلكتروني:</strong> <?= htmlspecialchars($app['email']) ?></p>
             <p><strong>رقم الجوال:</strong> <?= htmlspecialchars($app['phone']) ?></p>
             <p><strong>المدينة:</strong> <?= htmlspecialchars($app['city']) ?></p>
+            <p><strong>الراتب المتوقع:</strong> <?= htmlspecialchars($app['expected_salary']) ?></p>
+            <p><strong>آخر راتب:</strong> <?= htmlspecialchars($app['last_salary']) ?></p>
+            <p><strong>فترة الإنذار:</strong> <?= htmlspecialchars($app['notice_period']) ?></p>
             <p><strong>المستوى التعليمي:</strong> <?= htmlspecialchars($app['education_level']) ?></p>
             <p><strong>التخصص:</strong> <?= htmlspecialchars($app['major']) ?></p>
             <p><strong>سنوات الخبرة:</strong> <?= htmlspecialchars($app['experience_years']) ?></p>
@@ -121,8 +124,9 @@ include 'header.php';
 
         <hr style="border: 0; border-top: 1px solid #eee;">
 
+        <p><strong>آخر وظيفة سابقة - اسم المنظمة والمسمى
+                الوظيفي:</strong><br><?= nl2br(htmlspecialchars($app['experience_details'])) ?></p>
         <p><strong>الدورات التدريبية:</strong><br><?= nl2br(htmlspecialchars($app['courses'])) ?></p>
-        <p><strong>تفاصيل الخبرة:</strong><br><?= nl2br(htmlspecialchars($app['experience_details'])) ?></p>
 
         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 

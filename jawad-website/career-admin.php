@@ -118,7 +118,7 @@ if (count($where_clauses) > 0) {
 $sql = "
     SELECT 
         a.id, a.first_name, a.last_name, a.email, a.phone, a.cv_file, a.status,
-        a.nationality, a.birth_date,
+        a.nationality, a.birth_date, a.experience_details, a.expected_salary, a.last_salary, a.notice_period,
         j.title_ar
     FROM job_applications a
     JOIN jobs j ON a.job_id = j.id

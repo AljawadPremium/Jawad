@@ -80,12 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         birth_date, birth_place, gender, nationality,
                         city, phone, emergency_phone, email, address,
                         education_level, major, graduation_year,
-                        courses, experience_details, experience_years, cv_file, status
-                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        courses, experience_details, expected_salary, last_salary, notice_period,
+                        experience_years, cv_file, status
+                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             if ($stmt = $conn->prepare($sql)) {
                 $stmt->bind_param(
-                    "isssssssssssssssississ",
+                    "isssssssssssssssisssssiss",
                     $job_id,
                     $_POST['first_name'],
                     $_POST['father_name'],
@@ -105,6 +106,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $graduation_year,
                     $_POST['courses'],
                     $_POST['experience_details'],
+                    $_POST['expected_salary'],
+                    $_POST['last_salary'],
+                    $_POST['notice_period'],
                     $experience_years,
                     $cv_path,
                     $status
@@ -210,7 +214,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <textarea class="full" name="courses"
                     placeholder="<?= $lang === 'ar' ? 'الدورات' : 'Courses' ?>"></textarea>
                 <textarea class="full" name="experience_details"
-                    placeholder="<?= $lang === 'ar' ? 'الخبرات السابقة' : 'Experience Details' ?>"></textarea>
+                    placeholder="<?= $lang === 'ar' ? 'آخر وظيفة سابقة - اسم المنظمة والمسمى الوظيفي' : 'Previous last job (Organization and Title)' ?>"></textarea>
+
+                <input type="text" name="expected_salary"
+                    placeholder="<?= $lang === 'ar' ? 'الراتب المتوقع' : 'Expected Salary' ?>">
+                <input type="text" name="last_salary" placeholder="<?= $lang === 'ar' ? 'آخر راتب' : 'Last Salary' ?>">
+                <input type="text" name="notice_period"
+                    placeholder="<?= $lang === 'ar' ? 'فترة الإنذار' : 'Notice Period' ?>">
+
                 <select name="experience_years" required>
                     <option value="" disabled selected><?= $lang === 'ar' ? 'سنوات الخبرة' : 'Years of Experience' ?>
                     </option>

@@ -25,7 +25,7 @@ if ($result->num_rows === 0) {
 $job = $result->fetch_assoc();
 
 // Language fallbacks for display
-$display_title = ($lang === 'ar') 
+$display_title = ($lang === 'ar')
     ? (!empty($job['title_ar']) ? $job['title_ar'] : $job['title_en'])
     : (!empty($job['title_en']) ? $job['title_en'] : $job['title_ar']);
 
@@ -34,8 +34,10 @@ $display_description = ($lang === 'ar')
     : (!empty($job['description_en']) ? $job['description_en'] : $job['description_ar']);
 
 // Helper function to render multi-line text into a bulleted list
-function renderBulletedList($text) {
-    if (empty(trim($text ?? ''))) return;
+function renderBulletedList($text)
+{
+    if (empty(trim($text ?? '')))
+        return;
     $lines = explode("\n", trim($text ?? ''));
     echo "<ul>";
     foreach ($lines as $line) {
@@ -50,7 +52,7 @@ function renderBulletedList($text) {
 
 <div class="job-details-wrapper" <?= $lang === 'ar' ? 'dir="rtl"' : '' ?>>
     <div class="job-details-box">
-        
+
         <div class="job-header">
             <h1 class="job-title"><?= htmlspecialchars($display_title) ?></h1>
             <p class="job-summary">
@@ -61,7 +63,7 @@ function renderBulletedList($text) {
         <div class="job-meta-grid">
             <div>
                 <span><?= $lang === 'ar' ? 'الموقع' : 'Location' ?></span>
-                <?php 
+                <?php
                 $display_location = ($lang === 'ar')
                     ? (!empty($job['location']) ? $job['location'] : ($job['location_en'] ?? ''))
                     : (!empty($job['location_en']) ? $job['location_en'] : ($job['location'] ?? ''));
@@ -70,7 +72,7 @@ function renderBulletedList($text) {
             </div>
             <div>
                 <span><?= $lang === 'ar' ? 'نوع العمل' : 'Job Type' ?></span>
-                <?php 
+                <?php
                 $type_map = [
                     'Full-time' => 'دوام كامل',
                     'Part-time' => 'دوام جزئي',
@@ -82,30 +84,31 @@ function renderBulletedList($text) {
                 ?>
             </div>
             <?php if (!empty($job['salary'])): ?>
-            <div>
-                <span><?= $lang === 'ar' ? 'الراتب' : 'Salary' ?></span>
-                <?= htmlspecialchars($job['salary']) ?>
-            </div>
+                <div>
+                    <span><?= $lang === 'ar' ? 'الراتب' : 'Salary' ?></span>
+                    <?= htmlspecialchars($job['salary']) ?>
+                </div>
             <?php endif; ?>
             <div>
                 <span><?= $lang === 'ar' ? 'تاريخ النشر' : 'Published' ?></span>
                 <?= htmlspecialchars($job['publish_date']) ?>
             </div>
             <?php if (!empty($job['end_date'])): ?>
-            <div>
-                <span><?= $lang === 'ar' ? 'تاريخ الانتهاء' : 'End Date' ?></span>
-                <?= htmlspecialchars($job['end_date']) ?>
-            </div>
+                <div>
+                    <span><?= $lang === 'ar' ? 'تاريخ الانتهاء' : 'End Date' ?></span>
+                    <?= htmlspecialchars($job['end_date']) ?>
+                </div>
             <?php endif; ?>
         </div>
 
         <!-- 2-Column Grid for Details -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;">
-            <?php 
-            $req = ($lang === 'ar') 
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;">
+            <?php
+            $req = ($lang === 'ar')
                 ? (!empty($job['requirements']) ? $job['requirements'] : $job['requirements_en'])
                 : (!empty($job['requirements_en']) ? $job['requirements_en'] : $job['requirements']);
-            
+
             if (!empty(trim($req ?? ''))): ?>
                 <div class="job-section" style="margin-bottom: 0;">
                     <h3><?= $lang === 'ar' ? 'شروط الوظيفة' : 'Requirements' ?></h3>
@@ -144,7 +147,8 @@ function renderBulletedList($text) {
             <?php if (!empty(trim($job['languages'] ?? ''))): ?>
                 <div class="job-section" style="margin-bottom: 0;">
                     <h3><?= $lang === 'ar' ? 'اللغات' : 'Languages' ?></h3>
-                    <p style="color: #555; font-size: 16px; margin: 0; padding-<?= $lang === 'ar' ? 'right' : 'left' ?>: 25px;">
+                    <p
+                        style="color: #555; font-size: 16px; margin: 0; padding-<?= $lang === 'ar' ? 'right' : 'left' ?>: 25px;">
                         <?= htmlspecialchars($job['languages']) ?>
                     </p>
                 </div>
@@ -153,7 +157,8 @@ function renderBulletedList($text) {
             <?php if (!empty(trim($job['gender'] ?? ''))): ?>
                 <div class="job-section" style="margin-bottom: 0;">
                     <h3><?= $lang === 'ar' ? 'الجنس' : 'Gender' ?></h3>
-                    <p style="color: #555; font-size: 16px; margin: 0; padding-<?= $lang === 'ar' ? 'right' : 'left' ?>: 25px;">
+                    <p
+                        style="color: #555; font-size: 16px; margin: 0; padding-<?= $lang === 'ar' ? 'right' : 'left' ?>: 25px;">
                         <?= htmlspecialchars($job['gender']) ?>
                     </p>
                 </div>
@@ -167,6 +172,24 @@ function renderBulletedList($text) {
             <a href="<?= $lang === 'ar' ? 'career-ar.php' : 'career.php' ?>" class="btn-secondary">
                 <?= $lang === 'ar' ? 'العودة للوظائف' : 'Back to Careers' ?>
             </a>
+        </div>
+
+        <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid #eee; text-align: center;">
+            <h4 style="margin-bottom: 20px; color: #333;"><?= $lang === 'ar' ? 'شارك هذه الوظيفة' : 'Share this Job' ?>
+            </h4>
+            <?php
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+            $host = $_SERVER['HTTP_HOST'];
+            $job_url = $protocol . $host . "/job-details.php?id=" . $job['id'];
+            $qr_code_url = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . urlencode($job_url);
+            ?>
+            <div
+                style="display: inline-block; background: white; padding: 15px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <img src="<?= $qr_code_url ?>" alt="QR Code"
+                    style="width: 120px; height: 120px; display: block; margin-bottom: 10px;">
+                <p style="margin: 0; font-size: 12px; color: #888;">
+                    <?= $lang === 'ar' ? 'امسح الرمز للمشاركة' : 'Scan to share' ?></p>
+            </div>
         </div>
 
     </div>

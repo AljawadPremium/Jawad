@@ -253,8 +253,10 @@ include 'header.php';
                         <div style="display: flex; align-items: center; gap: 20px;">
                             <span><?= htmlspecialchars($job['title_ar']) ?></span>
                             <?php
-                            $job_url = "https://home.aljawad.sa/job-details.php?id=" . $job['id'];
-                            $qr_url = "https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=" . urlencode($job_url);
+                            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+                            $host = $_SERVER['HTTP_HOST'];
+                            $job_url = $protocol . $host . "/job-details.php?id=" . $job['id'];
+                            $qr_url = "https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=" . urlencode($job_url);
                             ?>
                             <a href="<?= $qr_url ?>" target="_blank" title="اضغط لتكبير الـ QR Code">
                                 <img src="<?= $qr_url ?>" alt="QR Code"
@@ -404,6 +406,7 @@ include 'header.php';
                             <th>العمر</th>
                             <th>الوظيفة</th>
                             <th>السيرة الذاتية</th>
+                            <th>QR</th>
                             <th>الحالة</th>
                             <th>الإجراء</th>
                         </tr>

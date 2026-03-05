@@ -5,7 +5,8 @@
     <h2>الوظائف المتاحة</h2>
 
     <form method="GET" class="search-box" dir="rtl">
-        <input type="text" name="search" placeholder="ابحث عن وظيفة..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+        <input type="text" name="search" placeholder="ابحث عن وظيفة..."
+            value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
         <button type="submit">بحث</button>
     </form>
 
@@ -36,7 +37,7 @@
                 <h3><?= htmlspecialchars($job['title_ar']) ?></h3>
 
                 <p class="job-meta">
-                    <?php 
+                    <?php
                     $type_map = [
                         'Full-time' => 'دوام كامل',
                         'Part-time' => 'دوام جزئي',
@@ -56,9 +57,20 @@
 
                 <p><?= htmlspecialchars(mb_substr($job['description_ar'], 0, 120)) ?>...</p>
 
-                <a href="job-details.php?id=<?= $job['id'] ?>&lang=ar" class="apply-btn">
-                    عرض التفاصيل
-                </a>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <a href="job-details.php?id=<?= $job['id'] ?>&lang=ar" class="apply-btn">
+                        عرض التفاصيل
+                    </a>
+                    <?php
+                    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+                    $host = $_SERVER['HTTP_HOST'];
+                    $item_url = $protocol . $host . "/job-details.php?id=" . $job['id'];
+                    $qr_thumb = "https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=" . urlencode($item_url);
+                    ?>
+                    <img src="<?= $qr_thumb ?>" alt="QR"
+                        style="width: 40px; height: 40px; border: 1px solid #eee; opacity: 0.7;"
+                        title="امسح الرمز للعرض على الجوال">
+                </div>
             </div>
         <?php endwhile; ?>
     </div>

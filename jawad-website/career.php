@@ -5,7 +5,8 @@
     <h2>Open Positions</h2>
 
     <form method="GET" class="search-box">
-        <input type="text" name="search" placeholder="Search jobs..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+        <input type="text" name="search" placeholder="Search jobs..."
+            value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
         <button type="submit">Search</button>
     </form>
 
@@ -46,9 +47,20 @@
 
                 <p><?= htmlspecialchars(substr($job['description_en'], 0, 120)) ?>...</p>
 
-                <a href="job-details.php?id=<?= $job['id'] ?>" class="apply-btn">
-                    View Details
-                </a>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <a href="job-details.php?id=<?= $job['id'] ?>" class="apply-btn">
+                        View Details
+                    </a>
+                    <?php
+                    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+                    $host = $_SERVER['HTTP_HOST'];
+                    $item_url = $protocol . $host . "/job-details.php?id=" . $job['id'];
+                    $qr_thumb = "https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=" . urlencode($item_url);
+                    ?>
+                    <img src="<?= $qr_thumb ?>" alt="QR"
+                        style="width: 40px; height: 40px; border: 1px solid #eee; opacity: 0.7;"
+                        title="Scan to view on mobile">
+                </div>
             </div>
         <?php endwhile; ?>
     </div>
